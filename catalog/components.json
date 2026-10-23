@@ -1,0 +1,788 @@
+{
+  "schemaVersion": "0.1-draft",
+  "catalogVersion": "0.1.0-draft.1",
+  "libraryVersion": null,
+  "project": "AesteticUi",
+  "implementationStatus": "not-started",
+  "components": [
+    {
+      "id": "icon",
+      "name": "Icon",
+      "layer": "primitive",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Иконка с согласованной семантикой доступности",
+      "dependsOn": []
+    },
+    {
+      "id": "button",
+      "name": "Button",
+      "layer": "primitive",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Действие, в том числе loading/disabled и icon-only",
+      "dependsOn": [
+        "icon",
+        "spinner"
+      ]
+    },
+    {
+      "id": "link",
+      "name": "Link",
+      "layer": "primitive",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Переход по готовому URL",
+      "dependsOn": []
+    },
+    {
+      "id": "spinner",
+      "name": "Spinner",
+      "layer": "primitive",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Индикация выполнения",
+      "dependsOn": []
+    },
+    {
+      "id": "status",
+      "name": "Status",
+      "layer": "primitive",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Текстовое состояние с необязательным индикатором",
+      "dependsOn": [
+        "icon"
+      ]
+    },
+    {
+      "id": "input",
+      "name": "Input",
+      "layer": "primitive",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Нативный ввод поддерживаемого типа",
+      "dependsOn": []
+    },
+    {
+      "id": "textarea",
+      "name": "Textarea",
+      "layer": "primitive",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Многострочный ввод",
+      "dependsOn": []
+    },
+    {
+      "id": "select",
+      "name": "Select",
+      "layer": "primitive",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Нативный single/multiple выбор",
+      "dependsOn": []
+    },
+    {
+      "id": "checkbox",
+      "name": "Checkbox",
+      "layer": "primitive",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Независимый выбор",
+      "dependsOn": []
+    },
+    {
+      "id": "radio",
+      "name": "Radio",
+      "layer": "primitive",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Один вариант в группе",
+      "dependsOn": []
+    },
+    {
+      "id": "switch",
+      "name": "Switch",
+      "layer": "primitive",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Значение переключателя без сетевого запроса",
+      "dependsOn": []
+    },
+    {
+      "id": "file-input",
+      "name": "FileInput",
+      "layer": "primitive",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Нативный выбор файла без storage CRUD",
+      "dependsOn": []
+    },
+    {
+      "id": "avatar",
+      "name": "Avatar",
+      "layer": "primitive",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Малое изображение пользователя и fallback",
+      "dependsOn": []
+    },
+    {
+      "id": "thumbnail",
+      "name": "Thumbnail",
+      "layer": "primitive",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Превью изображения и fallback",
+      "dependsOn": []
+    },
+    {
+      "id": "field",
+      "name": "Field",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Подпись, контрол, hint/error и ARIA-связи",
+      "dependsOn": []
+    },
+    {
+      "id": "fieldset",
+      "name": "Fieldset",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Группа выборов с legend",
+      "dependsOn": [
+        "field"
+      ]
+    },
+    {
+      "id": "input-group",
+      "name": "InputGroup",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Контрол с дополнением или кнопкой",
+      "dependsOn": [
+        "field",
+        "button"
+      ]
+    },
+    {
+      "id": "range",
+      "name": "Range",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Пара связанных полей от/до",
+      "dependsOn": [
+        "field",
+        "input"
+      ]
+    },
+    {
+      "id": "form",
+      "name": "Form",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Нативная форма и явная Laravel-интеграция",
+      "dependsOn": []
+    },
+    {
+      "id": "form-actions",
+      "name": "FormActions",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Главное и дополнительные действия формы",
+      "dependsOn": [
+        "button",
+        "link"
+      ]
+    },
+    {
+      "id": "validation-summary",
+      "name": "ValidationSummary",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Общий список ошибок формы",
+      "dependsOn": [
+        "link"
+      ]
+    },
+    {
+      "id": "panel",
+      "name": "Panel",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Выделенная рабочая секция с actions/footer",
+      "dependsOn": []
+    },
+    {
+      "id": "alert",
+      "name": "Alert",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Пояснение результата, ошибки или предупреждения",
+      "dependsOn": [
+        "icon"
+      ]
+    },
+    {
+      "id": "empty-state",
+      "name": "EmptyState",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Причина пустоты и следующий шаг",
+      "dependsOn": [
+        "icon",
+        "button"
+      ]
+    },
+    {
+      "id": "description-list",
+      "name": "DescriptionList",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Характеристики объекта в dl/dt/dd",
+      "dependsOn": []
+    },
+    {
+      "id": "dialog",
+      "name": "Dialog",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Модальная область с focus/close контрактом",
+      "dependsOn": [
+        "button"
+      ]
+    },
+    {
+      "id": "confirm-dialog",
+      "name": "ConfirmDialog",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Подтверждение действия",
+      "dependsOn": [
+        "dialog",
+        "form-actions"
+      ]
+    },
+    {
+      "id": "help-dialog",
+      "name": "HelpDialog",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Справка по действию или разделу",
+      "dependsOn": [
+        "dialog",
+        "button"
+      ]
+    },
+    {
+      "id": "dropdown",
+      "name": "Dropdown",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Раскрывающаяся область с локальным состоянием",
+      "dependsOn": [
+        "button"
+      ]
+    },
+    {
+      "id": "action-menu",
+      "name": "ActionMenu",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Меню действий с keyboard-контрактом",
+      "dependsOn": [
+        "dropdown",
+        "button",
+        "link"
+      ]
+    },
+    {
+      "id": "tabs",
+      "name": "Tabs",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Локальные представления одной сущности",
+      "dependsOn": [
+        "button"
+      ]
+    },
+    {
+      "id": "pagination",
+      "name": "Pagination",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Навигация по страницам результата",
+      "dependsOn": [
+        "link",
+        "icon"
+      ]
+    },
+    {
+      "id": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "layer": "composite",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Положение в иерархии и переходы к родителям",
+      "dependsOn": [
+        "link",
+        "icon"
+      ]
+    },
+    {
+      "id": "scope",
+      "name": "Scope",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Тема, плотность и ограниченная область оформления",
+      "dependsOn": []
+    },
+    {
+      "id": "assets",
+      "name": "Assets",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Подключение согласованных CSS/JS",
+      "dependsOn": []
+    },
+    {
+      "id": "page",
+      "name": "Page",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Рабочая область и общий вертикальный ритм",
+      "dependsOn": [
+        "scope"
+      ]
+    },
+    {
+      "id": "page-header",
+      "name": "PageHeader",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Заголовок страницы, пояснение и действия",
+      "dependsOn": [
+        "button"
+      ]
+    },
+    {
+      "id": "section",
+      "name": "Section",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Смысловой раздел и его заголовок",
+      "dependsOn": []
+    },
+    {
+      "id": "stack",
+      "name": "Stack",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Последовательность элементов с семантическим интервалом",
+      "dependsOn": []
+    },
+    {
+      "id": "inline",
+      "name": "Inline",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Ряд элементов с переносом и согласованным промежутком",
+      "dependsOn": []
+    },
+    {
+      "id": "field-group",
+      "name": "FieldGroup",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Связанные поля и интервал внутри группы",
+      "dependsOn": [
+        "field"
+      ]
+    },
+    {
+      "id": "form-section",
+      "name": "FormSection",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Секция формы с пояснением и группами",
+      "dependsOn": [
+        "section",
+        "field-group"
+      ]
+    },
+    {
+      "id": "page-layout",
+      "name": "PageLayout",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Основная область и дополнительная панель",
+      "dependsOn": [
+        "page"
+      ]
+    },
+    {
+      "id": "app-shell",
+      "name": "AppShell",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Общая оболочка с местами бренда, меню и аккаунта",
+      "dependsOn": [
+        "scope",
+        "navigation",
+        "page-layout"
+      ]
+    },
+    {
+      "id": "navigation",
+      "name": "Navigation",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Глобальное дерево разрешённых разделов",
+      "dependsOn": [
+        "navigation-group",
+        "navigation-item"
+      ]
+    },
+    {
+      "id": "navigation-group",
+      "name": "NavigationGroup",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Группировка и раскрытие разделов",
+      "dependsOn": [
+        "navigation-item"
+      ]
+    },
+    {
+      "id": "navigation-item",
+      "name": "NavigationItem",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Пункт с active/expanded состоянием",
+      "dependsOn": [
+        "link",
+        "icon"
+      ]
+    },
+    {
+      "id": "list-toolbar",
+      "name": "ListToolbar",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Итоги списка, размер страницы, действия",
+      "dependsOn": [
+        "page-size",
+        "button"
+      ]
+    },
+    {
+      "id": "filter-bar",
+      "name": "FilterBar",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Фильтрующая форма из обычных полей",
+      "dependsOn": [
+        "form",
+        "field",
+        "form-actions"
+      ]
+    },
+    {
+      "id": "page-size",
+      "name": "PageSize",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Количество строк на странице",
+      "dependsOn": [
+        "select"
+      ]
+    },
+    {
+      "id": "table",
+      "name": "Table",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Семейство head/body/row/cell/sort/empty и overflow",
+      "dependsOn": [
+        "sort-header",
+        "table-empty-row"
+      ]
+    },
+    {
+      "id": "sort-header",
+      "name": "SortHeader",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Заголовок с направлением и URL сортировки",
+      "dependsOn": [
+        "link",
+        "icon"
+      ]
+    },
+    {
+      "id": "selection",
+      "name": "Selection",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Выбор видимых строк, select-all и indeterminate",
+      "dependsOn": [
+        "checkbox"
+      ]
+    },
+    {
+      "id": "bulk-actions",
+      "name": "BulkActions",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Выбранное количество и отдельная форма действий",
+      "dependsOn": [
+        "selection",
+        "form-actions"
+      ]
+    },
+    {
+      "id": "table-empty-row",
+      "name": "TableEmptyRow",
+      "layer": "structure",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Пустая строка с корректным colspan",
+      "dependsOn": [
+        "empty-state"
+      ]
+    },
+    {
+      "id": "list-page",
+      "name": "ListPage",
+      "layer": "pattern",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Готовая композиция списка с фильтрами и состояниями",
+      "dependsOn": [
+        "page",
+        "page-header",
+        "filter-bar",
+        "list-toolbar",
+        "table",
+        "pagination",
+        "bulk-actions"
+      ]
+    },
+    {
+      "id": "detail-page",
+      "name": "DetailPage",
+      "layer": "pattern",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Карточка объекта с характеристиками и связанными данными",
+      "dependsOn": [
+        "page",
+        "page-header",
+        "description-list",
+        "tabs",
+        "section"
+      ]
+    },
+    {
+      "id": "edit-page",
+      "name": "EditPage",
+      "layer": "pattern",
+      "targetRelease": "0.1",
+      "status": "planned",
+      "purpose": "Форма редактирования с секциями и обратной связью",
+      "dependsOn": [
+        "page",
+        "page-header",
+        "form",
+        "form-section",
+        "validation-summary",
+        "form-actions"
+      ]
+    },
+    {
+      "id": "settings-page",
+      "name": "SettingsPage",
+      "layer": "pattern",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Настройки с группами и локальной навигацией",
+      "dependsOn": [
+        "edit-page",
+        "tabs"
+      ]
+    },
+    {
+      "id": "master-detail",
+      "name": "MasterDetail",
+      "layer": "pattern",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Список и выбранный объект рядом",
+      "dependsOn": [
+        "page-layout",
+        "list-page",
+        "detail-page"
+      ]
+    },
+    {
+      "id": "dashboard",
+      "name": "Dashboard",
+      "layer": "pattern",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Обзор состояния и переходы к задачам",
+      "dependsOn": [
+        "page",
+        "section",
+        "panel"
+      ]
+    },
+    {
+      "id": "sign-in",
+      "name": "SignIn",
+      "layer": "pattern",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Вход и ошибки авторизации без backend auth",
+      "dependsOn": [
+        "form",
+        "field",
+        "alert",
+        "form-actions"
+      ]
+    },
+    {
+      "id": "combobox",
+      "name": "Combobox",
+      "layer": "extension",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Поиск и выбор варианта",
+      "dependsOn": [
+        "input",
+        "select"
+      ]
+    },
+    {
+      "id": "tree-select",
+      "name": "TreeSelect",
+      "layer": "extension",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Выбор из переданной иерархии",
+      "dependsOn": [
+        "select"
+      ]
+    },
+    {
+      "id": "image-picker",
+      "name": "ImagePicker",
+      "layer": "extension",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Выбор, локальное preview, replace/remove",
+      "dependsOn": [
+        "file-input",
+        "button"
+      ]
+    },
+    {
+      "id": "media-grid",
+      "name": "MediaGrid",
+      "layer": "extension",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Превью, выбор и слоты действий",
+      "dependsOn": [
+        "thumbnail",
+        "selection"
+      ]
+    },
+    {
+      "id": "repeater",
+      "name": "Repeater",
+      "layer": "extension",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Добавление и удаление повторяющихся групп",
+      "dependsOn": [
+        "field-group",
+        "button"
+      ]
+    },
+    {
+      "id": "rich-text",
+      "name": "RichText",
+      "layer": "extension",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Подключаемый текстовый редактор",
+      "dependsOn": [
+        "field"
+      ]
+    },
+    {
+      "id": "key-value-tree",
+      "name": "KeyValueTree",
+      "layer": "extension",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Просмотр вложенных данных",
+      "dependsOn": [
+        "description-list"
+      ]
+    },
+    {
+      "id": "command-palette",
+      "name": "CommandPalette",
+      "layer": "extension",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Быстрый поиск разрешённых команд и переходов",
+      "dependsOn": [
+        "dialog",
+        "input",
+        "link"
+      ]
+    }
+  ]
+}

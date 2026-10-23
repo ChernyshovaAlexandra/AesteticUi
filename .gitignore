@@ -1,0 +1,13 @@
+/.tmp/
+/.env
+/.env.*
+!/.env.example
+/vendor/
+/node_modules/
+/workbench/vendor/
+/workbench/node_modules/
+/workbench/.env
+/workbench/storage/logs/*
+/workbench/bootstrap/cache/*.php
+.DS_Store
+*.log
