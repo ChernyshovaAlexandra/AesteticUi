@@ -1,0 +1,34 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "aestetic/workbench",
+    "description": "Local Laravel workbench for the Aestetic UI Blade catalog.",
+    "type": "project",
+    "require": {
+        "php": "^8.3",
+        "aestetic/ui": "0.1.x-dev",
+        "laravel/framework": "^12.0"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "..",
+            "options": {
+                "symlink": true,
+                "versions": {"aestetic/ui": "0.1.x-dev"}
+            }
+        }
+    ],
+    "autoload": {
+        "psr-4": {"Workbench\\": "app/"}
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi",
+            "@php artisan vendor:publish --tag=aestetic-ui-assets --force --ansi"
+        ]
+    },
+    "config": {"sort-packages": true},
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

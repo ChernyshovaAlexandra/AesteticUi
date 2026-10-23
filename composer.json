@@ -1,0 +1,35 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "aestetic/ui",
+    "description": "Blade components and administration interface foundations for Laravel.",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/ChernyshovaAlexandra/AesteticUi",
+    "support": {
+        "issues": "https://github.com/ChernyshovaAlexandra/AesteticUi/issues",
+        "source": "https://github.com/ChernyshovaAlexandra/AesteticUi"
+    },
+    "keywords": ["laravel", "blade", "ui", "admin"],
+    "require": {
+        "php": "^8.3",
+        "illuminate/contracts": "^12.0",
+        "illuminate/support": "^12.0",
+        "illuminate/view": "^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Aestetic\\Ui\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": ["Aestetic\\Ui\\AesteticUiServiceProvider"]
+        }
+    },
+    "scripts": {
+        "build:assets": "@php tools/build-assets.php"
+    },
+    "archive": {
+        "exclude": ["/design", "/workbench", "/tests", "/.tmp", "/.env", "/.env.*"]
+    }
+}

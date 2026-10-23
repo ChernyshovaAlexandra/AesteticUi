@@ -5,9 +5,14 @@
 /vendor/
 /node_modules/
 /workbench/vendor/
+/workbench/.tmp/
+/workbench/composer.release-check.json
+/workbench/composer.release-check.lock
 /workbench/node_modules/
 /workbench/.env
 /workbench/storage/logs/*
+!/workbench/storage/logs/.gitignore
+/workbench/public/vendor/
 /workbench/bootstrap/cache/*.php
 .DS_Store
 *.log

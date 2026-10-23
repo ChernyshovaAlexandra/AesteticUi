@@ -1,0 +1,142 @@
+/* Scoped foundations. No global reset, external fonts or frontend dependencies. */
+.aui-scope {
+    --aui-background: #ffffff;
+    --aui-foreground: #202733;
+    --aui-muted: #687180;
+    --aui-border: #d4d4d8;
+    --aui-focus-border: #71717a;
+    --aui-secondary: #f4f4f5;
+    --aui-primary: #18181b;
+    --aui-primary-hover: #303036;
+    --aui-primary-text: #fafafa;
+    --aui-control-height: 36px;
+    color-scheme: light;
+    color: var(--aui-foreground);
+    background: var(--aui-background);
+    font-family: "Aptos", "Segoe UI Variable Text", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.aui-scope[data-aui-theme="dark"] {
+    --aui-background: #18181b;
+    --aui-foreground: #fafafa;
+    --aui-muted: #a1a1aa;
+    --aui-border: #46464f;
+    --aui-focus-border: #a1a1aa;
+    --aui-secondary: #27272a;
+    --aui-primary: #fafafa;
+    --aui-primary-hover: #e4e4e7;
+    --aui-primary-text: #18181b;
+    color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+    .aui-scope[data-aui-theme="system"] {
+        --aui-background: #18181b;
+        --aui-foreground: #fafafa;
+        --aui-muted: #a1a1aa;
+        --aui-border: #46464f;
+        --aui-focus-border: #a1a1aa;
+        --aui-secondary: #27272a;
+        --aui-primary: #fafafa;
+        --aui-primary-hover: #e4e4e7;
+        --aui-primary-text: #18181b;
+        color-scheme: dark;
+    }
+}
+
+.aui-scope[data-aui-density="compact"] {
+    --aui-control-height: 32px;
+}
+
+:where(.aui-scope, .aui-scope *, .aui-scope *::before, .aui-scope *::after) {
+    box-sizing: border-box;
+}
+
+.aui-page {
+    display: grid;
+    gap: 32px;
+    width: 100%;
+    min-width: 0;
+    padding: clamp(20px, 3vw, 48px);
+}
+
+.aui-page__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.aui-page__intro {
+    display: grid;
+    gap: 8px;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.aui-page__title {
+    margin: 0;
+    font-size: clamp(24px, 2.3vw, 30px);
+    line-height: 1.25;
+    font-weight: 650;
+    letter-spacing: -.035em;
+}
+
+.aui-page__description { color: var(--aui-muted); }
+.aui-page__content { min-width: 0; }
+.aui-page__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.aui-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: var(--aui-control-height);
+    max-width: 100%;
+    padding: 5px 12px;
+    border: 1px solid var(--aui-border);
+    border-radius: 6px;
+    color: var(--aui-foreground);
+    background: var(--aui-background);
+    font: inherit;
+    font-weight: 500;
+    line-height: 20px;
+    text-align: center;
+    overflow-wrap: anywhere;
+    cursor: pointer;
+    touch-action: manipulation;
+    transition: background-color .15s, border-color .15s;
+}
+
+.aui-button--primary {
+    color: var(--aui-primary-text);
+    background: var(--aui-primary);
+    border-color: var(--aui-primary);
+}
+
+.aui-button--primary:hover:not(:disabled) {
+    background: var(--aui-primary-hover);
+    border-color: var(--aui-primary-hover);
+}
+
+.aui-button--outline:hover:not(:disabled) { background: var(--aui-secondary); }
+
+.aui-button:focus-visible {
+    outline: none;
+    border-color: var(--aui-focus-border);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.aui-button:disabled { opacity: .5; cursor: not-allowed; }
+
+@media (pointer: coarse) {
+    .aui-button { min-height: max(44px, var(--aui-control-height)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .aui-button { transition: none; }
+}

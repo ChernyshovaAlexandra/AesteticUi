@@ -1,0 +1,13 @@
+{
+    "schemaVersion": 1,
+    "assets": {
+        "css": {
+            "file": "aestetic-ui.29fb12e83fb3.css",
+            "sha256": "29fb12e83fb3b56bc439aa05833ea3408dcce79221bd1d408689f6bb6246574d"
+        },
+        "js": {
+            "file": "aestetic-ui.98668c3dda86.js",
+            "sha256": "98668c3dda867d34a92826a89ff4f4f31c1ed9393f501adc3c8938958a3000f8"
+        }
+    }
+}

@@ -1,140 +1,1173 @@
 {
   "schemaVersion": "0.1-draft",
-  "catalogVersion": "0.1.0-draft.1",
-  "libraryVersion": null,
+  "catalogVersion": "0.1.0-draft.4",
+  "libraryVersion": "0.1.0-alpha.1",
   "project": "AesteticUi",
-  "implementationStatus": "not-started",
+  "implementationStatus": "atomic-components",
   "components": [
     {
       "id": "icon",
       "name": "Icon",
       "layer": "primitive",
       "targetRelease": "0.1",
-      "status": "planned",
-      "purpose": "Иконка с согласованной семантикой доступности",
-      "dependsOn": []
+      "status": "experimental",
+      "purpose": "Только оригинальная иконка Lucide с согласованной семантикой доступности (U-11)",
+      "dependsOn": [],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.icon",
+        "reference": "docs/component-reuse.md"
+      },
+      "catalogGroup": "visual",
+      "implementation": {
+        "path": "resources/views/components/icon.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": [
+          "scope"
+        ]
+      },
+      "api": {
+        "props": {
+          "name": {
+            "default": null,
+            "required": true,
+            "values": [
+              "layout-grid",
+              "calendar-days",
+              "users",
+              "chevron-right",
+              "arrow-left",
+              "chevron-down",
+              "search",
+              "plus",
+              "sliders-horizontal",
+              "download",
+              "pencil",
+              "mail",
+              "phone",
+              "map-pin",
+              "check",
+              "x",
+              "circle-question-mark",
+              "menu",
+              "arrow-down-up",
+              "package",
+              "refresh-cw",
+              "triangle-alert",
+              "clock",
+              "external-link",
+              "eye",
+              "eye-off",
+              "info",
+              "circle-check",
+              "circle-x",
+              "chevron-left",
+              "ellipsis"
+            ]
+          },
+          "label": {
+            "default": null
+          }
+        },
+        "slots": [],
+        "notes": "Только оригинальные Lucide. Без label иконка декоративна; label задаёт доступное имя самостоятельной иконке.",
+        "example": "<x-ui::icon name=\"search\" label=\"Поиск\" />"
+      },
+      "previews": [
+        {
+          "id": "icon-examples",
+          "title": "Иконки Lucide",
+          "description": "Оригинальные иконки с явными доступными подписями.",
+          "height": 144
+        }
+      ],
+      "examples": [
+        "catalog/examples/icon-examples.blade.php",
+        "docs/installation.md"
+      ],
+      "displayName": "Иконка",
+      "guidance": {
+        "summary": "Короткое узнаваемое обозначение из Lucide.",
+        "when": [
+          "Как дополнение к подписи или как компактное обозначение с доступным именем."
+        ],
+        "placement": [
+          "Рядом с относящимся к ней текстом; размер согласуйте с соседней типографикой."
+        ],
+        "avoid": [
+          "Не используйте другие наборы, собственные SVG или emoji вместо иконок.",
+          "Не оставляйте новое или неоднозначное действие без текстовой подписи."
+        ],
+        "accessibility": [
+          "Без label иконка скрыта от скринридера. Для самостоятельного изображения задайте label.",
+          "В icon-only кнопке доступное имя задайте самой кнопке через aria-label; вложенная иконка остаётся декоративной."
+        ]
+      }
     },
     {
       "id": "button",
       "name": "Button",
       "layer": "primitive",
       "targetRelease": "0.1",
-      "status": "planned",
+      "status": "experimental",
       "purpose": "Действие, в том числе loading/disabled и icon-only",
       "dependsOn": [
         "icon",
         "spinner"
-      ]
+      ],
+      "designReference": "docs/controls.md",
+      "usageRules": [
+        "Визуальный ориентир — shadcn/ui; нейтральная палитра light/dark и общая геометрия контролов.",
+        "Синие outline и focus-ring не добавляются; фокус изменяет существующую нейтральную рамку или фон (U-14)."
+      ],
+      "implementation": {
+        "path": "resources/views/components/button.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": [
+          "scope",
+          "spinner",
+          "icon"
+        ]
+      },
+      "api": {
+        "props": {
+          "variant": {
+            "default": "primary",
+            "values": [
+              "primary",
+              "outline"
+            ]
+          },
+          "type": {
+            "default": "button",
+            "values": [
+              "button",
+              "submit",
+              "reset"
+            ]
+          },
+          "disabled": {
+            "default": false,
+            "type": "boolean"
+          },
+          "loading": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "slots": [
+          "default"
+        ],
+        "notes": "Нативная кнопка primary/outline. Loading показывает Spinner, задаёт aria-busy и блокирует повторное нажатие. Иконка передаётся в slot; для icon-only нужен aria-label.",
+        "example": "<x-ui::button type=\"submit\">Сохранить</x-ui::button>"
+      },
+      "examples": [
+        "examples/getting-started.blade.php",
+        "docs/installation.md"
+      ],
+      "previews": [
+        {
+          "id": "button-primary",
+          "title": "Основное действие",
+          "description": "Нейтральная заливка, нативная кнопка type=button.",
+          "height": 132
+        },
+        {
+          "id": "button-outline",
+          "title": "Дополнительное действие",
+          "description": "Тонкая рамка без заливки; тот же контракт кнопки.",
+          "height": 132
+        },
+        {
+          "id": "button-disabled",
+          "title": "Недоступное действие",
+          "description": "Нативный disabled для обоих вариантов.",
+          "height": 152
+        },
+        {
+          "id": "button-long-label",
+          "title": "Длинная подпись",
+          "description": "Перенос текста в узком превью без замены доступной подписи.",
+          "height": 168
+        },
+        {
+          "id": "button-form",
+          "title": "Отправка формы",
+          "description": "Нативный submit обновляет только этот пример, сохраняя выбранные тему и плотность.",
+          "height": 168
+        },
+        {
+          "id": "button-loading",
+          "title": "Выполнение действия",
+          "description": "loading блокирует нажатие и показывает доступное состояние ожидания.",
+          "height": 144
+        },
+        {
+          "id": "button-icon",
+          "title": "Только иконка",
+          "description": "Доступное имя принадлежит кнопке, Lucide внутри декоративна.",
+          "height": 144
+        }
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.button",
+        "reference": "docs/component-reuse.md"
+      },
+      "catalogGroup": "actions",
+      "displayName": "Кнопка",
+      "guidance": {
+        "summary": "Выполнить действие в текущем интерфейсе: сохранить, добавить, подтвердить.",
+        "when": [
+          "Для команды, отправки формы или открытия действия внутри текущего сценария.",
+          "Primary подчёркивает главное действие блока; outline подходит для вторичного."
+        ],
+        "placement": [
+          "В конце формы рядом с результатом ввода; в заголовке страницы для действия над всей страницей.",
+          "Связанные действия держите одной группой. В одном блоке завершения выделяйте одно главное действие."
+        ],
+        "avoid": [
+          "Не заменяйте кнопкой переход по адресу — для этого Link.",
+          "Не пишите неопределённое «ОК», если можно назвать действие: «Сохранить», «Удалить»."
+        ],
+        "accessibility": [
+          "Текст должен объяснять действие. Для кнопки только с иконкой нужен aria-label.",
+          "По умолчанию type=button; для отправки формы укажите type=submit. Enter/Space работают нативно."
+        ]
+      }
     },
     {
       "id": "link",
       "name": "Link",
       "layer": "primitive",
       "targetRelease": "0.1",
-      "status": "planned",
+      "status": "experimental",
       "purpose": "Переход по готовому URL",
-      "dependsOn": []
+      "dependsOn": [],
+      "designReference": "docs/navigation.md",
+      "usageRules": [
+        "Визуальный ориентир — Breadcrumb/Link shadcn/ui: нейтральные цвета, согласованная типографика и подчёркивание без синих outline/focus-ring.",
+        "Крошки используют упорядоченный список, Lucide-разделители и aria-current=page для текущего уровня. Несуществующие страницы не превращаются в ссылки.",
+        "Ссылки сохраняют href и нативную семантику; кнопки действий не заменяются ссылками ради внешнего вида."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.link",
+        "reference": "docs/component-reuse.md"
+      },
+      "catalogGroup": "actions",
+      "implementation": {
+        "path": "resources/views/components/link.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": [
+          "scope"
+        ]
+      },
+      "api": {
+        "props": {
+          "href": {
+            "default": null,
+            "required": true
+          }
+        },
+        "slots": [
+          "default"
+        ],
+        "notes": "Настоящий a с href. Маршрут, target и прочие HTML-атрибуты задаёт приложение.",
+        "example": "<x-ui::link href=\"/projects\">Все проекты</x-ui::link>"
+      },
+      "previews": [
+        {
+          "id": "link-example",
+          "title": "Ссылка и место назначения",
+          "description": "Настоящий href с переходом к якорю внутри примера.",
+          "height": 160
+        }
+      ],
+      "examples": [
+        "catalog/examples/link-example.blade.php",
+        "docs/installation.md"
+      ],
+      "displayName": "Ссылка",
+      "guidance": {
+        "summary": "Перейти на страницу, к объекту или к разделу документа.",
+        "when": [
+          "Для перехода по известному URL, к записи или к якорю."
+        ],
+        "placement": [
+          "В тексте пояснения, заголовке объекта, хлебных крошках или вторичной навигации.",
+          "Название ссылки должно объяснять место назначения без соседнего текста."
+        ],
+        "avoid": [
+          "Не запускайте удаление или сохранение через GET-ссылку.",
+          "Не делайте несколько соседних ссылок с одинаковым текстом «Подробнее», если они ведут к разным объектам."
+        ],
+        "accessibility": [
+          "Сохраняйте href и нативные действия браузера, включая открытие в новой вкладке.",
+          "Фокус виден через подчёркивание и нейтральный фон."
+        ]
+      }
     },
     {
       "id": "spinner",
       "name": "Spinner",
       "layer": "primitive",
       "targetRelease": "0.1",
-      "status": "planned",
+      "status": "experimental",
       "purpose": "Индикация выполнения",
-      "dependsOn": []
+      "dependsOn": [],
+      "catalogGroup": "feedback",
+      "implementation": {
+        "path": "resources/views/components/spinner.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": [
+          "scope",
+          "icon"
+        ]
+      },
+      "api": {
+        "props": {
+          "label": {
+            "default": "Загрузка"
+          }
+        },
+        "slots": [],
+        "notes": "Lucide RefreshCw с ролью status и текстом для скринридера. Reduced motion отключает вращение.",
+        "example": "<x-ui::spinner label=\"Загружаем список\" />"
+      },
+      "previews": [
+        {
+          "id": "spinner-example",
+          "title": "Ожидание операции",
+          "description": "Иконка Lucide, текст для скринридера и reduced motion.",
+          "height": 140
+        }
+      ],
+      "examples": [
+        "catalog/examples/spinner-example.blade.php",
+        "docs/installation.md"
+      ],
+      "displayName": "Индикатор загрузки",
+      "guidance": {
+        "summary": "Показать, что операция выполняется и результата нужно подождать.",
+        "when": [
+          "Для короткого ожидания действия; текст уточняет, что загружается."
+        ],
+        "placement": [
+          "Внутри выполняющей действие кнопки или рядом с обновляемой областью."
+        ],
+        "avoid": [
+          "Не заменяйте им всё содержимое уже загруженной страницы при локальном обновлении.",
+          "Для структуры ещё не загруженного списка в будущем используйте Skeleton."
+        ],
+        "accessibility": [
+          "label даёт конкретный текст скринридеру. Не добавляйте несколько одинаковых live-объявлений в одном месте.",
+          "При reduced motion вращение отключается, текст ожидания остаётся."
+        ]
+      }
     },
     {
       "id": "status",
       "name": "Status",
       "layer": "primitive",
       "targetRelease": "0.1",
-      "status": "planned",
-      "purpose": "Текстовое состояние с необязательным индикатором",
+      "status": "experimental",
+      "purpose": "Бейдж состояния с понятным текстом, смысловым цветом и необязательной иконкой Lucide",
       "dependsOn": [
         "icon"
-      ]
+      ],
+      "designReference": "docs/badges.md",
+      "usageRules": [
+        "Визуальный ориентир — shadcn/ui: компактная округлая форма, тонкая рамка, мягкая подложка.",
+        "neutral — вспомогательные метки; info — новый; progress — в работе; success — успех; warning — внимание; danger — ошибка; cancelled — заметная отмена.",
+        "Статус имеет текстовую подпись. Цвет и декоративная Lucide не заменяют смысл текста.",
+        "Счётчики нейтральны. Статичный бейдж не является кнопкой и не получает role=status автоматически.",
+        "Синие outline и focus-ring не добавляются, в том числе ради доступности (U-14)."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.badge",
+        "reference": "docs/component-reuse.md"
+      },
+      "catalogGroup": "feedback",
+      "implementation": {
+        "path": "resources/views/components/status.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": [
+          "scope"
+        ]
+      },
+      "api": {
+        "props": {
+          "tone": {
+            "default": "neutral",
+            "values": [
+              "neutral",
+              "info",
+              "progress",
+              "success",
+              "warning",
+              "danger",
+              "cancelled"
+            ]
+          }
+        },
+        "slots": [
+          "default"
+        ],
+        "notes": "Статичная метка с текстом. Смысл не передаётся одним цветом; role=status автоматически не добавляется.",
+        "example": "<x-ui::status tone=\"progress\">В работе</x-ui::status>"
+      },
+      "previews": [
+        {
+          "id": "status-tones",
+          "title": "Смысловые состояния",
+          "description": "Новый, в работе, готово, внимание, ошибка и отмена различимы.",
+          "height": 300
+        }
+      ],
+      "examples": [
+        "catalog/examples/status-tones.blade.php",
+        "docs/installation.md"
+      ],
+      "displayName": "Бейдж состояния",
+      "guidance": {
+        "summary": "Коротко обозначить состояние объекта или количество.",
+        "when": [
+          "Для состояния записи в списке, заголовке карточки или рядом с названием объекта."
+        ],
+        "placement": [
+          "Рядом с тем объектом, который он описывает; в таблице — в выделенной колонке статуса."
+        ],
+        "avoid": [
+          "Не оформляйте как кнопку без действия.",
+          "Не делайте новый и в работе одним цветом: info — новый, progress — в работе. Ошибка — danger, отмена — cancelled."
+        ],
+        "accessibility": [
+          "Пишите текст состояния, а не передавайте смысл одним цветом.",
+          "Статичный бейдж не получает live-role; для результата операции нужен отдельный сценарий уведомления."
+        ]
+      }
     },
     {
       "id": "input",
       "name": "Input",
       "layer": "primitive",
       "targetRelease": "0.1",
-      "status": "planned",
-      "purpose": "Нативный ввод поддерживаемого типа",
-      "dependsOn": []
+      "status": "experimental",
+      "purpose": "Собственное оформление ввода с нативной семантикой поддерживаемого типа",
+      "dependsOn": [],
+      "designReference": "docs/controls.md",
+      "usageRules": [
+        "Визуальный ориентир — shadcn/ui; нейтральная палитра light/dark и общая геометрия контролов.",
+        "Синие outline и focus-ring не добавляются; фокус изменяет существующую нейтральную рамку или фон (U-14)."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.input",
+        "reference": "docs/component-reuse.md",
+        "runtime": "design/reference/controls.js"
+      },
+      "catalogGroup": "input",
+      "implementation": {
+        "path": "resources/views/components/input.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": [
+          "scope"
+        ]
+      },
+      "api": {
+        "props": {
+          "type": {
+            "default": "text",
+            "values": [
+              "text",
+              "email",
+              "password",
+              "search",
+              "tel",
+              "url",
+              "number"
+            ]
+          },
+          "value": {
+            "default": null
+          },
+          "invalid": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "slots": [],
+        "notes": "name, id, required, autocomplete, min/max/step, disabled, readonly и ARIA передаются нативному input. Подпись и текст ошибки задаются явно. Дата/время требуют отдельных компонентов.",
+        "example": "<label>Электронная почта\n    <x-ui::input type=\"email\" name=\"email\" autocomplete=\"email\" />\n</label>"
+      },
+      "previews": [
+        {
+          "id": "input-states",
+          "title": "Значение и состояния",
+          "description": "Обычное поле, email, ноль, readonly, disabled и ошибка.",
+          "height": 540
+        }
+      ],
+      "examples": [
+        "catalog/examples/input-states.blade.php",
+        "docs/installation.md"
+      ],
+      "displayName": "Поле ввода",
+      "guidance": {
+        "summary": "Короткое значение в одну строку: имя, почта, число или поисковый запрос.",
+        "when": [
+          "Для значений, которые пользователь вводит самостоятельно. Тип email/number выбирайте по данным."
+        ],
+        "placement": [
+          "Под постоянной подписью; подсказку и ошибку размещайте рядом с этим же полем.",
+          "Связанные поля собирайте в смысловую группу, сохраняя последовательность чтения."
+        ],
+        "avoid": [
+          "Не используйте placeholder вместо подписи.",
+          "Не подключайте стандартный date/time picker через этот Input: для дат и времени предусмотрены отдельные компоненты."
+        ],
+        "accessibility": [
+          "Свяжите label с id или оберните поле в label. Подсказку/ошибку свяжите через aria-describedby.",
+          "Передавайте autocomplete, name и ограничения явно. invalid показывает ошибку, но не выполняет серверную валидацию."
+        ]
+      }
     },
     {
       "id": "textarea",
       "name": "Textarea",
       "layer": "primitive",
       "targetRelease": "0.1",
-      "status": "planned",
-      "purpose": "Многострочный ввод",
-      "dependsOn": []
+      "status": "experimental",
+      "purpose": "Многострочный ввод в общем оформлении полей",
+      "dependsOn": [],
+      "designReference": "docs/controls.md",
+      "usageRules": [
+        "Визуальный ориентир — shadcn/ui; нейтральная палитра light/dark и общая геометрия контролов.",
+        "Синие outline и focus-ring не добавляются; фокус изменяет существующую нейтральную рамку или фон (U-14)."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.textarea",
+        "reference": "docs/component-reuse.md",
+        "runtime": "design/reference/controls.js"
+      },
+      "catalogGroup": "input",
+      "implementation": {
+        "path": "resources/views/components/textarea.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": [
+          "scope"
+        ]
+      },
+      "api": {
+        "props": {
+          "value": {
+            "default": null
+          },
+          "invalid": {
+            "default": false,
+            "type": "boolean"
+          },
+          "rows": {
+            "default": 4,
+            "type": "integer"
+          }
+        },
+        "slots": [
+          "default"
+        ],
+        "notes": "Многострочный ввод. Явный value имеет приоритет над slot; нативные атрибуты и подпись задаются приложением.",
+        "example": "<label>Комментарий\n    <x-ui::textarea name=\"comment\" rows=\"4\" />\n</label>"
+      },
+      "previews": [
+        {
+          "id": "textarea-states",
+          "title": "Многострочный ввод",
+          "description": "Обычное, readonly и disabled состояния.",
+          "height": 540
+        }
+      ],
+      "examples": [
+        "catalog/examples/textarea-states.blade.php",
+        "docs/installation.md"
+      ],
+      "displayName": "Многострочное поле",
+      "guidance": {
+        "summary": "Комментарий, описание или другой текст из нескольких строк.",
+        "when": [
+          "Для свободного текста, который может занимать несколько строк."
+        ],
+        "placement": [
+          "В форме под подписью, с шириной и высотой, подходящими ожидаемому объёму текста."
+        ],
+        "avoid": [
+          "Не используйте для структурированных списков или форматированного документа без соответствующего редактора.",
+          "Не блокируйте вертикальное изменение размера без причины."
+        ],
+        "accessibility": [
+          "Нужна видимая подпись. Ошибка должна иметь текст и связь aria-describedby.",
+          "value/old/errors передаёт приложение; HTML из пользовательского значения экранируется."
+        ]
+      }
     },
     {
       "id": "select",
       "name": "Select",
       "layer": "primitive",
       "targetRelease": "0.1",
-      "status": "planned",
-      "purpose": "Нативный single/multiple выбор",
-      "dependsOn": []
+      "status": "experimental",
+      "purpose": "Собственный single/multiple выбор с оформленным списком и нативным значением формы",
+      "dependsOn": [],
+      "designReference": "docs/controls.md",
+      "usageRules": [
+        "Визуальный ориентир — shadcn/ui; нейтральная палитра light/dark и общая геометрия контролов.",
+        "Синие outline и focus-ring не добавляются; фокус изменяет существующую нейтральную рамку или фон (U-14).",
+        "Popup-поверхность согласована с меню действий; Select остаётся listbox, а не menu. См. docs/overlays.md."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.select",
+        "reference": "docs/component-reuse.md",
+        "runtime": "design/reference/controls.js"
+      },
+      "catalogGroup": "selection",
+      "implementation": {
+        "path": "resources/views/components/select.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": [
+          "scope",
+          "icon"
+        ]
+      },
+      "api": {
+        "props": {
+          "options": {
+            "default": [],
+            "type": "array<{value,label,disabled?}>"
+          },
+          "value": {
+            "default": null
+          },
+          "placeholder": {
+            "default": "Выберите значение"
+          },
+          "disabled": {
+            "default": false,
+            "type": "boolean"
+          },
+          "invalid": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "slots": [],
+        "notes": "Одиночный выбор из локального списка. Свой combobox/listbox с готовым JS из Assets; нативный select сохраняет значение, required и FormData. Без JS остаётся нативный fallback. Multiple, optgroup и удалённый поиск не реализованы.",
+        "example": "<label for=\"city\">Город</label>\n<x-ui::select id=\"city\" name=\"city\" :options=\"[['value' => 'hanoi', 'label' => 'Ханой'], ['value' => 'danang', 'label' => 'Дананг']]\" />"
+      },
+      "previews": [
+        {
+          "id": "select-states",
+          "title": "Свой список выбора",
+          "description": "Откройте список мышью или клавиатурой; пример с выбранным значением и disabled.",
+          "height": 440
+        }
+      ],
+      "examples": [
+        "catalog/examples/select-states.blade.php",
+        "docs/installation.md"
+      ],
+      "displayName": "Выпадающий выбор",
+      "guidance": {
+        "summary": "Выбрать одно значение из заранее известного списка.",
+        "when": [
+          "Для короткого локального набора, когда все варианты не обязательно показывать постоянно."
+        ],
+        "placement": [
+          "В форме рядом с подписью поля или в группе фильтров, где понятен предмет выбора."
+        ],
+        "avoid": [
+          "Для небольшого набора, который важно сравнить сразу, рассмотрите Radio.",
+          "Для длинного/удалённого списка нужен будущий Combobox с поиском. Multiple этим контрактом не поддерживается."
+        ],
+        "accessibility": [
+          "Свяжите label с id. Стрелки/Home/End перемещают активный вариант; Enter/Space выбирают, Escape закрывает.",
+          "Tab продолжает порядок фокуса. Начало названия ищется набором с клавиатуры; disabled-варианты пропускаются."
+        ]
+      }
     },
     {
       "id": "checkbox",
       "name": "Checkbox",
       "layer": "primitive",
       "targetRelease": "0.1",
-      "status": "planned",
+      "status": "experimental",
       "purpose": "Независимый выбор",
-      "dependsOn": []
+      "dependsOn": [],
+      "designReference": "docs/controls.md",
+      "usageRules": [
+        "Визуальный ориентир — shadcn/ui; нейтральная палитра light/dark и общая геометрия контролов.",
+        "Синие outline и focus-ring не добавляются; фокус изменяет существующую нейтральную рамку или фон (U-14).",
+        "Визуальный ориентир — Checkbox/Radio/Switch shadcn/ui: компактная геометрия, нейтральная палитра и различимые checked/disabled состояния.",
+        "Сохранять нативные name/value/checked и форму; checkbox поддерживает indeterminate, radio группируется по name.",
+        "Подпись и область нажатия не уменьшаются до размера глифа. Hover/focus меняет существующую нейтральную рамку без синего outline/focus-ring."
+      ],
+      "catalogGroup": "selection",
+      "implementation": {
+        "path": "resources/views/components/checkbox.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": [
+          "scope",
+          "icon"
+        ]
+      },
+      "api": {
+        "props": {
+          "checked": {
+            "default": false,
+            "type": "boolean"
+          },
+          "disabled": {
+            "default": false,
+            "type": "boolean"
+          },
+          "indeterminate": {
+            "default": false,
+            "type": "boolean"
+          },
+          "value": {
+            "default": "1"
+          }
+        },
+        "slots": [
+          "default"
+        ],
+        "notes": "Нативный checkbox с подписью в slot и Lucide Check. Для mixed-состояния нужен JS из Assets. Невыбранный checkbox не отправляется в FormData.",
+        "example": "<x-ui::checkbox name=\"notifications\" :checked=\"true\">Получать уведомления</x-ui::checkbox>"
+      },
+      "previews": [
+        {
+          "id": "checkbox-states",
+          "title": "Независимые опции",
+          "description": "Unchecked, checked, mixed и disabled.",
+          "height": 280
+        }
+      ],
+      "examples": [
+        "catalog/examples/checkbox-states.blade.php",
+        "docs/installation.md"
+      ],
+      "displayName": "Чекбокс",
+      "guidance": {
+        "summary": "Выбрать независимую опцию или несколько значений.",
+        "when": [
+          "Для независимых флагов, множественного выбора и подтверждения согласия.",
+          "Indeterminate обозначает частичный выбор подчинённых пунктов; его вычисляет приложение."
+        ],
+        "placement": [
+          "Перед подписью опции; связанные опции размещайте группой с общим заголовком."
+        ],
+        "avoid": [
+          "Не используйте набор чекбоксов, если разрешён ровно один вариант — для этого Radio.",
+          "Не полагайтесь на отправку unchecked-значения: браузер его не отправляет."
+        ],
+        "accessibility": [
+          "Подпись в slot кликабельна и связана с нативным input. Space переключает состояние.",
+          "Для mixed подключите Assets; checked/disabled передавайте как boolean через binding."
+        ]
+      }
     },
     {
       "id": "radio",
       "name": "Radio",
       "layer": "primitive",
       "targetRelease": "0.1",
-      "status": "planned",
+      "status": "experimental",
       "purpose": "Один вариант в группе",
-      "dependsOn": []
+      "dependsOn": [],
+      "designReference": "docs/controls.md",
+      "usageRules": [
+        "Визуальный ориентир — shadcn/ui; нейтральная палитра light/dark и общая геометрия контролов.",
+        "Синие outline и focus-ring не добавляются; фокус изменяет существующую нейтральную рамку или фон (U-14).",
+        "Визуальный ориентир — Checkbox/Radio/Switch shadcn/ui: компактная геометрия, нейтральная палитра и различимые checked/disabled состояния.",
+        "Сохранять нативные name/value/checked и форму; checkbox поддерживает indeterminate, radio группируется по name.",
+        "Подпись и область нажатия не уменьшаются до размера глифа. Hover/focus меняет существующую нейтральную рамку без синего outline/focus-ring."
+      ],
+      "catalogGroup": "selection",
+      "implementation": {
+        "path": "resources/views/components/radio.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": [
+          "scope"
+        ]
+      },
+      "api": {
+        "props": {
+          "value": {
+            "default": null,
+            "required": true
+          },
+          "checked": {
+            "default": false,
+            "type": "boolean"
+          },
+          "disabled": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "slots": [
+          "default"
+        ],
+        "notes": "Нативные radio объединяются общим name внутри формы; стрелки и Space работают по правилам браузера.",
+        "example": "<x-ui::radio name=\"delivery\" value=\"email\" :checked=\"true\">Письмо</x-ui::radio>\n<x-ui::radio name=\"delivery\" value=\"sms\">SMS</x-ui::radio>"
+      },
+      "previews": [
+        {
+          "id": "radio-states",
+          "title": "Один вариант из группы",
+          "description": "Общее имя связывает три нативные радиокнопки.",
+          "height": 240
+        }
+      ],
+      "examples": [
+        "catalog/examples/radio-states.blade.php",
+        "docs/installation.md"
+      ],
+      "displayName": "Радиокнопка",
+      "guidance": {
+        "summary": "Выбрать один вариант из небольшой видимой группы.",
+        "when": [
+          "Когда варианты нужно сразу видеть и сравнивать: способ доставки, режим обработки."
+        ],
+        "placement": [
+          "Группой под общим вопросом или legend; один name на одну логическую группу формы."
+        ],
+        "avoid": [
+          "Не используйте независимые имена для вариантов одной группы.",
+          "Для десятков вариантов рассмотрите Select/Combobox."
+        ],
+        "accessibility": [
+          "У каждого варианта есть собственная текстовая подпись.",
+          "Стрелки перемещают выбор внутри нативной группы; Space выбирает вариант."
+        ]
+      }
     },
     {
       "id": "switch",
       "name": "Switch",
       "layer": "primitive",
       "targetRelease": "0.1",
-      "status": "planned",
+      "status": "experimental",
       "purpose": "Значение переключателя без сетевого запроса",
-      "dependsOn": []
+      "dependsOn": [],
+      "designReference": "docs/controls.md",
+      "usageRules": [
+        "Визуальный ориентир — shadcn/ui; нейтральная палитра light/dark и общая геометрия контролов.",
+        "Синие outline и focus-ring не добавляются; фокус изменяет существующую нейтральную рамку или фон (U-14).",
+        "Визуальный ориентир — Checkbox/Radio/Switch shadcn/ui: компактная геометрия, нейтральная палитра и различимые checked/disabled состояния.",
+        "Сохранять нативные name/value/checked и форму; checkbox поддерживает indeterminate, radio группируется по name.",
+        "Подпись и область нажатия не уменьшаются до размера глифа. Hover/focus меняет существующую нейтральную рамку без синего outline/focus-ring."
+      ],
+      "catalogGroup": "selection",
+      "implementation": {
+        "path": "resources/views/components/switch.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": [
+          "scope"
+        ]
+      },
+      "api": {
+        "props": {
+          "checked": {
+            "default": false,
+            "type": "boolean"
+          },
+          "disabled": {
+            "default": false,
+            "type": "boolean"
+          },
+          "value": {
+            "default": "1"
+          }
+        },
+        "slots": [
+          "default"
+        ],
+        "notes": "Checkbox с role=switch. Компонент не выполняет запрос сам; сохранение настройки принадлежит приложению.",
+        "example": "<x-ui::switch name=\"digest\" :checked=\"true\">Еженедельный дайджест</x-ui::switch>"
+      },
+      "previews": [
+        {
+          "id": "switch-states",
+          "title": "Включено и выключено",
+          "description": "Нативное значение и постоянная подпись настройки.",
+          "height": 240
+        }
+      ],
+      "examples": [
+        "catalog/examples/switch-states.blade.php",
+        "docs/installation.md"
+      ],
+      "displayName": "Переключатель",
+      "guidance": {
+        "summary": "Включить или выключить одну настройку.",
+        "when": [
+          "Для понятного состояния «включено/выключено», а не выбора варианта из списка."
+        ],
+        "placement": [
+          "Рядом с названием настройки. Если изменения сохраняются отдельно, держите явное действие сохранения у группы."
+        ],
+        "avoid": [
+          "Не используйте вместо согласия с условиями или выбора нескольких строк таблицы — для этого Checkbox.",
+          "Не меняйте подпись с «Включить» на «Выключить»: имя настройки должно оставаться стабильным."
+        ],
+        "accessibility": [
+          "Slot содержит постоянное название настройки; role=switch сообщает состояние.",
+          "Space меняет значение. Сетевые запросы и обработка ошибки сохранения остаются в приложении."
+        ]
+      }
     },
     {
       "id": "file-input",
       "name": "FileInput",
       "layer": "primitive",
       "targetRelease": "0.1",
-      "status": "planned",
+      "status": "experimental",
       "purpose": "Нативный выбор файла без storage CRUD",
-      "dependsOn": []
+      "dependsOn": [],
+      "designReference": "docs/media.md",
+      "usageRules": [
+        "Визуальный ориентир — shadcn/ui; нейтральная палитра light/dark и общая геометрия контролов.",
+        "Синие outline и focus-ring не добавляются; фокус изменяет существующую нейтральную рамку или фон (U-14).",
+        "Визуальный ориентир — нейтральные Input/Card/Aspect Ratio shadcn/ui; выбор файла и его превью согласованы с общими контролами.",
+        "FileList исходного input остаётся значением формы. Локальное превью не является серверной загрузкой или подтверждением сохранения.",
+        "Для полного просмотра выбранного изображения использовать contain; временные object URL освобождать по жизненному циклу. Синие outline и focus-ring не добавляются (U-14)."
+      ],
+      "catalogGroup": "input",
+      "implementation": {
+        "path": "resources/views/components/file-input.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": [
+          "scope"
+        ]
+      },
+      "api": {
+        "props": {
+          "disabled": {
+            "default": false,
+            "type": "boolean"
+          },
+          "multiple": {
+            "default": false,
+            "type": "boolean"
+          },
+          "invalid": {
+            "default": false,
+            "type": "boolean"
+          }
+        },
+        "slots": [],
+        "notes": "Оформленный нативный выбор файла, включая accept и multiple. Загрузка на сервер, лимиты и проверка содержимого принадлежат приложению. Preview/drag-and-drop этим атомом не реализованы.",
+        "example": "<label>Изображение\n    <x-ui::file-input name=\"image\" accept=\"image/*\" />\n</label>"
+      },
+      "previews": [
+        {
+          "id": "file-input-states",
+          "title": "Выбор файла",
+          "description": "Обычный и disabled контрол; загрузки на сервер нет.",
+          "height": 300
+        }
+      ],
+      "examples": [
+        "catalog/examples/file-input-states.blade.php",
+        "docs/installation.md"
+      ],
+      "displayName": "Выбор файла",
+      "guidance": {
+        "summary": "Выбрать файл с устройства для дальнейшей обработки приложением.",
+        "when": [
+          "Для вложения, документа или изображения в форме."
+        ],
+        "placement": [
+          "Под подписью с допустимыми форматами и ограничениями; ошибки размещайте рядом."
+        ],
+        "avoid": [
+          "Не выдавайте accept за проверку безопасности файла.",
+          "Сам выбор файла не означает, что он загружен; прогресс и серверное сохранение принадлежат приложению."
+        ],
+        "accessibility": [
+          "Свяжите с label. Клавиатура открывает системный диалог выбора.",
+          "Для обычной формы с отправкой файлов нужен enctype=multipart/form-data; multiple используйте с согласованным серверным именем."
+        ]
+      }
     },
     {
       "id": "avatar",
       "name": "Avatar",
       "layer": "primitive",
       "targetRelease": "next",
-      "status": "planned",
+      "status": "experimental",
       "purpose": "Малое изображение пользователя и fallback",
-      "dependsOn": []
+      "dependsOn": [],
+      "designReference": "docs/avatars.md",
+      "usageRules": [
+        "Ориентир — Avatar shadcn/ui: круглая форма, нейтральная подложка, размеры 24/32/40px и инициалы как fallback.",
+        "Группа использует тот же Avatar, небольшое перекрытие и вычисляемый +N; разделение цветом поверхности не является фокусным кольцом.",
+        "Рядом с именем аватар декоративный; самостоятельному аватару и группе требуется доступное имя. Аватар без действия не становится кнопкой.",
+        "Синие outline и focus-ring не добавляются (U-14). Прототип с инициалами не означает готовность Blade API или поддержки фотографий."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.avatar",
+        "reference": "docs/component-reuse.md"
+      },
+      "catalogGroup": "visual",
+      "implementation": {
+        "path": "resources/views/components/avatar.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": [
+          "scope"
+        ]
+      },
+      "api": {
+        "props": {
+          "name": {
+            "default": null,
+            "required": true
+          },
+          "src": {
+            "default": null
+          },
+          "initials": {
+            "default": null
+          }
+        },
+        "slots": [],
+        "notes": "Доступное имя — name; по умолчанию инициалы из первых двух слов. src необязателен; JS скрывает сломанное изображение и оставляет инициалы.",
+        "example": "<x-ui::avatar name=\"Анна Петрова\" />"
+      },
+      "previews": [
+        {
+          "id": "avatar-states",
+          "title": "Инициалы",
+          "description": "Имена из одного и нескольких слов, явный fallback.",
+          "height": 160
+        }
+      ],
+      "examples": [
+        "catalog/examples/avatar-states.blade.php",
+        "docs/installation.md"
+      ],
+      "displayName": "Аватар",
+      "guidance": {
+        "summary": "Обозначить человека рядом с именем или авторством.",
+        "when": [
+          "В списках участников, назначении исполнителя, авторстве и профиле."
+        ],
+        "placement": [
+          "Перед именем человека. Сам по себе аватар не заменяет имя в списке."
+        ],
+        "avoid": [
+          "Не используйте цвет/инициалы как единственный способ различить людей с одинаковыми именами.",
+          "Для предметных изображений используйте Thumbnail, а не круглый аватар."
+        ],
+        "accessibility": [
+          "name задаёт доступное имя; src необязателен, инициалы — fallback.",
+          "Если рядом уже читается имя и изображение должно быть декоративным, задайте aria-hidden на обёртке."
+        ]
+      }
     },
     {
       "id": "thumbnail",
       "name": "Thumbnail",
       "layer": "primitive",
       "targetRelease": "next",
-      "status": "planned",
+      "status": "experimental",
       "purpose": "Превью изображения и fallback",
-      "dependsOn": []
+      "dependsOn": [],
+      "designReference": "docs/media.md",
+      "usageRules": [
+        "Визуальный ориентир — нейтральные Input/Card/Aspect Ratio shadcn/ui; выбор файла и его превью согласованы с общими контролами.",
+        "FileList исходного input остаётся значением формы. Локальное превью не является серверной загрузкой или подтверждением сохранения.",
+        "Для полного просмотра выбранного изображения использовать contain; временные object URL освобождать по жизненному циклу. Синие outline и focus-ring не добавляются (U-14)."
+      ],
+      "catalogGroup": "visual",
+      "implementation": {
+        "path": "resources/views/components/thumbnail.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": [
+          "scope"
+        ]
+      },
+      "api": {
+        "props": {
+          "src": {
+            "default": null,
+            "required": true
+          },
+          "alt": {
+            "default": null,
+            "required": true
+          }
+        },
+        "slots": [],
+        "notes": "Статичное компактное изображение object-fit:cover. Не открывает просмотр и не является кнопкой. URL и alt задаёт приложение.",
+        "example": "<x-ui::thumbnail src=\"/images/interior.jpg\" alt=\"Интерьер помещения\" />"
+      },
+      "previews": [
+        {
+          "id": "thumbnail-example",
+          "title": "Миниатюра",
+          "description": "Локальное изображение из демонстрационного набора.",
+          "height": 180
+        }
+      ],
+      "examples": [
+        "catalog/examples/thumbnail-example.blade.php",
+        "docs/installation.md"
+      ],
+      "displayName": "Миниатюра",
+      "guidance": {
+        "summary": "Компактное изображение объекта в строке или списке.",
+        "when": [
+          "Для визуального узнавания товара, материала или вложенного изображения."
+        ],
+        "placement": [
+          "Перед названием объекта, рядом с метаданными файла; сохраняйте одинаковую геометрию списка."
+        ],
+        "avoid": [
+          "Не используйте обрезанную миниатюру для чтения мелких деталей.",
+          "Компонент не открывает галерею сам: при необходимости приложение оборачивает его в ссылку/кнопку с понятным действием."
+        ],
+        "accessibility": [
+          "Передайте alt, описывающий смысл изображения в этом контексте; для декоративного допускается пустой alt.",
+          "URL поставляет приложение, включая политику доступа к закрытым файлам."
+        ]
+      }
     },
     {
       "id": "field",
@@ -143,7 +1176,16 @@
       "targetRelease": "0.1",
       "status": "planned",
       "purpose": "Подпись, контрол, hint/error и ARIA-связи",
-      "dependsOn": []
+      "dependsOn": [],
+      "usageRules": [
+        "Ошибки показывать связанным текстом и aria-invalid, с согласованной красной рамкой без внешнего кольца; см. docs/feedback.md."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.field",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "fieldset",
@@ -210,7 +1252,18 @@
       "purpose": "Общий список ошибок формы",
       "dependsOn": [
         "link"
-      ]
+      ],
+      "designReference": "docs/feedback.md",
+      "usageRules": [
+        "Визуальный ориентир — Alert/Toast shadcn/ui: тонкая рамка, Lucide, заголовок и пояснение с общей типографикой.",
+        "Цвет дополняет понятный текст; ошибки сохраняют связь с полем и существующие роли. Синие outline и focus-ring не добавляются (U-14)."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.validationSummary",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "panel",
@@ -219,7 +1272,18 @@
       "targetRelease": "0.1",
       "status": "planned",
       "purpose": "Выделенная рабочая секция с actions/footer",
-      "dependsOn": []
+      "dependsOn": [],
+      "designReference": "docs/surfaces.md",
+      "usageRules": [
+        "Визуальный ориентир — Card/Dialog shadcn/ui: нейтральные поверхности, тонкая рамка, согласованные отступы и иерархия заголовков.",
+        "Синие outline и focus-ring не добавляются; взаимодействия сохраняют нативную семантику и нейтральные состояния (U-14)."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.panel",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "alert",
@@ -230,7 +1294,18 @@
       "purpose": "Пояснение результата, ошибки или предупреждения",
       "dependsOn": [
         "icon"
-      ]
+      ],
+      "designReference": "docs/feedback.md",
+      "usageRules": [
+        "Визуальный ориентир — Alert/Toast shadcn/ui: тонкая рамка, Lucide, заголовок и пояснение с общей типографикой.",
+        "Цвет дополняет понятный текст; ошибки сохраняют связь с полем и существующие роли. Синие outline и focus-ring не добавляются (U-14)."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.message",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "empty-state",
@@ -242,7 +1317,19 @@
       "dependsOn": [
         "icon",
         "button"
-      ]
+      ],
+      "designReference": "docs/empty-loading.md",
+      "usageRules": [
+        "Визуальный ориентир — Empty/Skeleton shadcn/ui: нейтральная палитра и общая геометрия с контролами и карточками.",
+        "Пустота не является ошибкой; сохранять понятное пояснение и релевантное действие. Скелетоны не являются интерактивными контролами.",
+        "Анимация загрузки отключается при reduced motion. Синие outline и focus-ring не добавляются (U-14)."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.empty",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "description-list",
@@ -251,7 +1338,13 @@
       "targetRelease": "0.1",
       "status": "planned",
       "purpose": "Характеристики объекта в dl/dt/dd",
-      "dependsOn": []
+      "dependsOn": [],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.descriptionList",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "dialog",
@@ -262,7 +1355,19 @@
       "purpose": "Модальная область с focus/close контрактом",
       "dependsOn": [
         "button"
-      ]
+      ],
+      "designReference": "docs/surfaces.md",
+      "usageRules": [
+        "Визуальный ориентир — Card/Dialog shadcn/ui: нейтральные поверхности, тонкая рамка, согласованные отступы и иерархия заголовков.",
+        "Синие outline и focus-ring не добавляются; взаимодействия сохраняют нативную семантику и нейтральные состояния (U-14)."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.dialogContent",
+        "reference": "docs/component-reuse.md",
+        "runtime": "design/reference/ui-runtime.js"
+      }
     },
     {
       "id": "confirm-dialog",
@@ -274,6 +1379,11 @@
       "dependsOn": [
         "dialog",
         "form-actions"
+      ],
+      "designReference": "docs/surfaces.md",
+      "usageRules": [
+        "Визуальный ориентир — Card/Dialog shadcn/ui: нейтральные поверхности, тонкая рамка, согласованные отступы и иерархия заголовков.",
+        "Синие outline и focus-ring не добавляются; взаимодействия сохраняют нативную семантику и нейтральные состояния (U-14)."
       ]
     },
     {
@@ -286,6 +1396,11 @@
       "dependsOn": [
         "dialog",
         "button"
+      ],
+      "designReference": "docs/surfaces.md",
+      "usageRules": [
+        "Визуальный ориентир — Card/Dialog shadcn/ui: нейтральные поверхности, тонкая рамка, согласованные отступы и иерархия заголовков.",
+        "Синие outline и focus-ring не добавляются; взаимодействия сохраняют нативную семантику и нейтральные состояния (U-14)."
       ]
     },
     {
@@ -310,7 +1425,19 @@
         "dropdown",
         "button",
         "link"
-      ]
+      ],
+      "designReference": "docs/overlays.md",
+      "usageRules": [
+        "Визуальный ориентир — Dropdown Menu/Tooltip shadcn/ui; нейтральные поверхности, компактные отступы и тонкая рамка.",
+        "Подсказка не заменяет подпись и не содержит действий. Меню действий не подменяет listbox выбора значения.",
+        "Фокус обозначается нейтральным фоном; синие outline и focus-ring не добавляются (U-14)."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.actionMenu",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "tabs",
@@ -321,7 +1448,20 @@
       "purpose": "Локальные представления одной сущности",
       "dependsOn": [
         "button"
-      ]
+      ],
+      "designReference": "docs/navigation.md",
+      "usageRules": [
+        "Визуальный ориентир — Sidebar/Tabs shadcn/ui; нейтральные активные состояния, поверхности и общий радиус с контролами.",
+        "Синие outline и focus-ring не добавляются; фокус меняет существующую нейтральную рамку/фон (U-14).",
+        "Сохранять различие навигационных ссылок, вкладок и кнопок фильтрации; не менять семантику ради одинакового внешнего вида."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.tabs",
+        "reference": "docs/component-reuse.md",
+        "runtime": "design/reference/ui-runtime.js"
+      }
     },
     {
       "id": "pagination",
@@ -333,7 +1473,21 @@
       "dependsOn": [
         "link",
         "icon"
-      ]
+      ],
+      "designReference": "docs/tables.md",
+      "usageRules": [
+        "Визуальный ориентир — shadcn/ui; нейтральные поверхности, тонкие разделители и общая геометрия с кнопками/полями.",
+        "Hover, выбранные строки и массовые действия обозначаются нейтральным фоном; синие outline и focus-ring не добавляются (U-14).",
+        "Текущая страница выделяется нейтральной рамкой и aria-current=page; остальные номера — ghost-кнопки, пропуски — оригинальная Lucide Ellipsis.",
+        "Показывать первую, последнюю и соседние страницы; на узком экране — стрелки и текущую страницу из общего числа. Крайние стрелки недоступны.",
+        "Состояние и смена страницы принадлежат вызывающему приложению; экземпляры изолируются по ID. После перерисовки сохранять фокус в пагинации без синих outline/focus-ring."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.pagination",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "breadcrumbs",
@@ -345,36 +1499,219 @@
       "dependsOn": [
         "link",
         "icon"
-      ]
+      ],
+      "designReference": "docs/navigation.md",
+      "usageRules": [
+        "Визуальный ориентир — Breadcrumb/Link shadcn/ui: нейтральные цвета, согласованная типографика и подчёркивание без синих outline/focus-ring.",
+        "Крошки используют упорядоченный список, Lucide-разделители и aria-current=page для текущего уровня. Несуществующие страницы не превращаются в ссылки.",
+        "Ссылки сохраняют href и нативную семантику; кнопки действий не заменяются ссылками ради внешнего вида."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.breadcrumbs",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "scope",
       "name": "Scope",
       "layer": "structure",
       "targetRelease": "0.1",
-      "status": "planned",
+      "status": "experimental",
       "purpose": "Тема, плотность и ограниченная область оформления",
-      "dependsOn": []
+      "dependsOn": [],
+      "implementation": {
+        "path": "resources/views/components/scope.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": []
+      },
+      "api": {
+        "props": {
+          "theme": {
+            "default": null,
+            "values": [
+              "light",
+              "dark",
+              "system"
+            ],
+            "fallback": "config:aestetic-ui.theme"
+          },
+          "density": {
+            "default": null,
+            "values": [
+              "comfortable",
+              "compact"
+            ],
+            "fallback": "config:aestetic-ui.density"
+          }
+        },
+        "slots": [
+          "default"
+        ],
+        "notes": "Область оформления; системная тема через CSS. data-aui-theme/data-aui-density задаются props.",
+        "example": "<x-ui::scope theme=\"light\" density=\"compact\">...</x-ui::scope>"
+      },
+      "examples": [
+        "examples/getting-started.blade.php",
+        "docs/installation.md"
+      ],
+      "previews": [
+        {
+          "id": "scope-theme",
+          "title": "Тема и плотность",
+          "description": "Переключатели каталога передают props реальному Scope.",
+          "height": 208
+        },
+        {
+          "id": "scope-nested",
+          "title": "Вложенные темы",
+          "description": "Локальные токены светлой и тёмной областей не меняют окружение.",
+          "height": 340
+        }
+      ],
+      "catalogGroup": "foundations",
+      "displayName": "Область оформления",
+      "guidance": {
+        "summary": "Задать тему и плотность для группы компонентов.",
+        "when": [
+          "Для границы применения токенов библиотеки."
+        ],
+        "placement": [
+          "Обычно оборачивает интерфейс приложения или отдельную библиотечную область."
+        ],
+        "avoid": [
+          "Не задавайте тему независимо каждому полю. Вложенный Scope используйте, когда области нужна другая тема."
+        ],
+        "accessibility": [
+          "Scope не меняет семантику вложенных кнопок и полей."
+        ]
+      }
     },
     {
       "id": "assets",
       "name": "Assets",
       "layer": "structure",
       "targetRelease": "0.1",
-      "status": "planned",
+      "status": "experimental",
       "purpose": "Подключение согласованных CSS/JS",
-      "dependsOn": []
+      "dependsOn": [],
+      "implementation": {
+        "path": "resources/views/components/assets.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": []
+      },
+      "api": {
+        "props": {},
+        "slots": [],
+        "notes": "CSS и ES module выбираются из dist/manifest.json. @once не дублирует подключения; JS улучшает Select, mixed-checkbox и fallback Avatar.",
+        "example": "<x-ui::assets />"
+      },
+      "examples": [
+        "examples/getting-started.blade.php",
+        "docs/installation.md"
+      ],
+      "previews": [
+        {
+          "id": "assets-once",
+          "title": "Однократное подключение",
+          "description": "Повторные вызовы Assets в одном Blade-render не дублируют CSS и JavaScript.",
+          "height": 208
+        }
+      ],
+      "catalogGroup": "foundations",
+      "displayName": "Подключение ассетов",
+      "guidance": {
+        "summary": "Подключить согласованные CSS и JavaScript установленного пакета.",
+        "when": [
+          "Один раз в основном Blade-layout."
+        ],
+        "placement": [
+          "В head; компоненты затем размещаются внутри Scope."
+        ],
+        "avoid": [
+          "Не копируйте CSS-классы из workbench и не подключайте отдельные версии файлов вручную."
+        ],
+        "accessibility": [
+          "Assets запускает улучшение Select и mixed-состояния Checkbox; нативные поля сохраняют своё поведение."
+        ]
+      }
     },
     {
       "id": "page",
       "name": "Page",
       "layer": "structure",
       "targetRelease": "0.1",
-      "status": "planned",
+      "status": "experimental",
       "purpose": "Рабочая область и общий вертикальный ритм",
       "dependsOn": [
         "scope"
-      ]
+      ],
+      "implementation": {
+        "path": "resources/views/components/page.blade.php",
+        "availability": "local-source-only",
+        "runtimeVerified": false,
+        "dependsOn": [
+          "scope"
+        ]
+      },
+      "api": {
+        "props": {
+          "title": {
+            "default": null
+          }
+        },
+        "slots": [
+          "default",
+          "description",
+          "actions"
+        ],
+        "notes": "Один main на страницу; необязательный h1. Использовать внутри Scope.",
+        "example": "<x-ui::page title=\"Настройки\">...</x-ui::page>"
+      },
+      "examples": [
+        "examples/getting-started.blade.php",
+        "docs/installation.md"
+      ],
+      "previews": [
+        {
+          "id": "page-header",
+          "title": "Заголовок и действия",
+          "description": "Реальный Page с description, actions и основным содержимым.",
+          "height": 340
+        },
+        {
+          "id": "page-minimal",
+          "title": "Без заголовка",
+          "description": "Необязательный header отсутствует; семантика main сохраняется.",
+          "height": 184
+        },
+        {
+          "id": "page-long-title",
+          "title": "Длинный заголовок",
+          "description": "Иерархия и перенос группы действий при ширине 360 px.",
+          "height": 480
+        }
+      ],
+      "catalogGroup": "foundations",
+      "displayName": "Страница",
+      "guidance": {
+        "summary": "Задать структуру, заголовок и основные действия рабочей области.",
+        "when": [
+          "Для основного содержимого страницы."
+        ],
+        "placement": [
+          "Внутри Scope; действия над всей страницей — в actions, пояснение — в description."
+        ],
+        "avoid": [
+          "Не вкладывайте Page в существующий main: Page сам создаёт main."
+        ],
+        "accessibility": [
+          "На документ — один main. Title создаёт h1; если title не передан, заголовок организует приложение."
+        ]
+      }
     },
     {
       "id": "page-header",
@@ -385,7 +1722,13 @@
       "purpose": "Заголовок страницы, пояснение и действия",
       "dependsOn": [
         "button"
-      ]
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.pageHeader",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "section",
@@ -394,7 +1737,13 @@
       "targetRelease": "0.1",
       "status": "planned",
       "purpose": "Смысловой раздел и его заголовок",
-      "dependsOn": []
+      "dependsOn": [],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.section",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "stack",
@@ -435,7 +1784,18 @@
       "dependsOn": [
         "section",
         "field-group"
-      ]
+      ],
+      "designReference": "docs/surfaces.md",
+      "usageRules": [
+        "Визуальный ориентир — Card/Dialog shadcn/ui: нейтральные поверхности, тонкая рамка, согласованные отступы и иерархия заголовков.",
+        "Синие outline и focus-ring не добавляются; взаимодействия сохраняют нативную семантику и нейтральные состояния (U-14)."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.formSection",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "page-layout",
@@ -459,7 +1819,13 @@
         "scope",
         "navigation",
         "page-layout"
-      ]
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.appShell",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "navigation",
@@ -471,7 +1837,19 @@
       "dependsOn": [
         "navigation-group",
         "navigation-item"
-      ]
+      ],
+      "designReference": "docs/navigation.md",
+      "usageRules": [
+        "Визуальный ориентир — Sidebar/Tabs shadcn/ui; нейтральные активные состояния, поверхности и общий радиус с контролами.",
+        "Синие outline и focus-ring не добавляются; фокус меняет существующую нейтральную рамку/фон (U-14).",
+        "Сохранять различие навигационных ссылок, вкладок и кнопок фильтрации; не менять семантику ради одинакового внешнего вида."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.navigationItems",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "navigation-group",
@@ -482,6 +1860,12 @@
       "purpose": "Группировка и раскрытие разделов",
       "dependsOn": [
         "navigation-item"
+      ],
+      "designReference": "docs/navigation.md",
+      "usageRules": [
+        "Визуальный ориентир — Sidebar/Tabs shadcn/ui; нейтральные активные состояния, поверхности и общий радиус с контролами.",
+        "Синие outline и focus-ring не добавляются; фокус меняет существующую нейтральную рамку/фон (U-14).",
+        "Сохранять различие навигационных ссылок, вкладок и кнопок фильтрации; не менять семантику ради одинакового внешнего вида."
       ]
     },
     {
@@ -494,6 +1878,12 @@
       "dependsOn": [
         "link",
         "icon"
+      ],
+      "designReference": "docs/navigation.md",
+      "usageRules": [
+        "Визуальный ориентир — Sidebar/Tabs shadcn/ui; нейтральные активные состояния, поверхности и общий радиус с контролами.",
+        "Синие outline и focus-ring не добавляются; фокус меняет существующую нейтральную рамку/фон (U-14).",
+        "Сохранять различие навигационных ссылок, вкладок и кнопок фильтрации; не менять семантику ради одинакового внешнего вида."
       ]
     },
     {
@@ -519,6 +1909,9 @@
         "form",
         "field",
         "form-actions"
+      ],
+      "usageRules": [
+        "Быстрые фильтры могут иметь общую со вкладками визуальную форму, но остаются кнопками с aria-pressed; см. docs/navigation.md."
       ]
     },
     {
@@ -530,7 +1923,13 @@
       "purpose": "Количество строк на странице",
       "dependsOn": [
         "select"
-      ]
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.pageSize",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "table",
@@ -542,7 +1941,18 @@
       "dependsOn": [
         "sort-header",
         "table-empty-row"
-      ]
+      ],
+      "designReference": "docs/tables.md",
+      "usageRules": [
+        "Визуальный ориентир — shadcn/ui; нейтральные поверхности, тонкие разделители и общая геометрия с кнопками/полями.",
+        "Hover, выбранные строки и массовые действия обозначаются нейтральным фоном; синие outline и focus-ring не добавляются (U-14)."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.table",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "sort-header",
@@ -554,6 +1964,11 @@
       "dependsOn": [
         "link",
         "icon"
+      ],
+      "designReference": "docs/tables.md",
+      "usageRules": [
+        "Визуальный ориентир — shadcn/ui; нейтральные поверхности, тонкие разделители и общая геометрия с кнопками/полями.",
+        "Hover, выбранные строки и массовые действия обозначаются нейтральным фоном; синие outline и focus-ring не добавляются (U-14)."
       ]
     },
     {
@@ -723,6 +2138,12 @@
       "dependsOn": [
         "file-input",
         "button"
+      ],
+      "designReference": "docs/media.md",
+      "usageRules": [
+        "Визуальный ориентир — нейтральные Input/Card/Aspect Ratio shadcn/ui; выбор файла и его превью согласованы с общими контролами.",
+        "FileList исходного input остаётся значением формы. Локальное превью не является серверной загрузкой или подтверждением сохранения.",
+        "Для полного просмотра выбранного изображения использовать contain; временные object URL освобождать по жизненному циклу. Синие outline и focus-ring не добавляются (U-14)."
       ]
     },
     {
@@ -735,7 +2156,195 @@
       "dependsOn": [
         "thumbnail",
         "selection"
+      ],
+      "designReference": "docs/media.md",
+      "usageRules": [
+        "Визуальный ориентир — нейтральные Input/Card/Aspect Ratio shadcn/ui; выбор файла и его превью согласованы с общими контролами.",
+        "FileList исходного input остаётся значением формы. Локальное превью не является серверной загрузкой или подтверждением сохранения.",
+        "Для полного просмотра выбранного изображения использовать contain; временные object URL освобождать по жизненному циклу. Синие outline и focus-ring не добавляются (U-14)."
       ]
+    },
+    {
+      "id": "image-figure",
+      "name": "ImageFigure",
+      "layer": "extension",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Изображение с alt, подписью, пропорциями и состояниями",
+      "dependsOn": [
+        "thumbnail"
+      ],
+      "designReference": "docs/media.md",
+      "usageRules": [
+        "Для самостоятельной иллюстрации внутри статьи или карточки; использовать figure/figcaption.",
+        "Ориентир — shadcn/ui; цвета и контролы общие для light/dark, иконки только Lucide.",
+        "Синие outline и focus-ring не добавляются; нейтральный фокус сохраняет клавиатурное управление.",
+        "Прототип не является доступным Blade API; библиотечная реализация и версия поставки ещё не определены."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/media-components.js",
+        "entryPoint": "window.AesteticReference.mediaComponents.figure",
+        "reference": "docs/component-reuse.md"
+      }
+    },
+    {
+      "id": "gallery",
+      "name": "Gallery",
+      "layer": "extension",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Сетка фотографий одного объекта с открытием просмотра",
+      "dependsOn": [
+        "thumbnail",
+        "image-viewer"
+      ],
+      "designReference": "docs/media.md",
+      "usageRules": [
+        "Показывать несколько ракурсов одновременно; управление файлами принадлежит MediaGrid.",
+        "Ориентир — shadcn/ui; цвета и контролы общие для light/dark, иконки только Lucide.",
+        "Синие outline и focus-ring не добавляются; нейтральный фокус сохраняет клавиатурное управление.",
+        "Прототип не является доступным Blade API; библиотечная реализация и версия поставки ещё не определены."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/media-components.js",
+        "entryPoint": "window.AesteticReference.mediaComponents.gallery",
+        "reference": "docs/component-reuse.md"
+      }
+    },
+    {
+      "id": "image-slider",
+      "name": "ImageSlider",
+      "layer": "extension",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Крупное изображение, подпись, стрелки, счётчик и миниатюры",
+      "dependsOn": [
+        "image-figure",
+        "button",
+        "thumbnail"
+      ],
+      "designReference": "docs/media.md",
+      "usageRules": [
+        "Один активный кадр; конечная навигация, клавиатура, свайп и миниатюры; без autoplay.",
+        "Ориентир — shadcn/ui; цвета и контролы общие для light/dark, иконки только Lucide.",
+        "Синие outline и focus-ring не добавляются; нейтральный фокус сохраняет клавиатурное управление.",
+        "Прототип не является доступным Blade API; библиотечная реализация и версия поставки ещё не определены."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/media-components.js",
+        "entryPoint": "window.AesteticReference.mediaComponents.slider",
+        "reference": "docs/component-reuse.md"
+      }
+    },
+    {
+      "id": "media-card",
+      "name": "MediaCard",
+      "layer": "composite",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Самостоятельная карточка с изображением, заголовком, необязательными бейджем, описанием и действиями",
+      "dependsOn": [
+        "thumbnail",
+        "status",
+        "button"
+      ],
+      "designReference": "docs/media.md",
+      "usageRules": [
+        "Один компонент используется отдельно, в сетке и в карусели; разметка карточки не дублируется в контейнерах.",
+        "MediaCard владеет содержимым и оформлением; ширина, колонки, интервалы и прокрутка принадлежат контейнеру.",
+        "Бейдж, описание и действия необязательны; уровень заголовка задаёт композиция страницы.",
+        "Действия и источник изображения задаёт приложение; карточка не зависит от конкретного набора фотографий или ImageViewer.",
+        "Оформление — shadcn/ui, иконки только Lucide, без синих outline и focus-ring.",
+        "Общий renderer существует в дизайн-прототипе; библиотечный Blade API ещё не реализован.",
+        "Изображение 16:10 с внутренним отступом, нейтральная рамка, общий радиус и лёгкая тень; содержимое и действия имеют согласованные отступы.",
+        "Действия располагаются отдельной нижней областью после растягивающегося тела; grid/flex-контейнеры выравнивают кнопки по нижнему краю без обрезки текста и фиксированной высоты карточки.",
+        "Действия не должны выглядеть как селекты: в примере используется компактная primary-кнопка без стрелки и растягивания по ширине; нижнее выравнивание сохраняется."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/media-card.js",
+        "entryPoint": "window.AesteticReference.mediaCard",
+        "reference": "docs/component-reuse.md"
+      }
+    },
+    {
+      "id": "carousel",
+      "name": "Carousel",
+      "layer": "extension",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Горизонтальная подборка карточек с кнопками и свайпом",
+      "dependsOn": [
+        "button"
+      ],
+      "designReference": "docs/media.md",
+      "usageRules": [
+        "Для самостоятельных карточек; использовать общую прокрутку для свайпа, кнопок и клавиатуры.",
+        "Принимать готовое содержимое; MediaCard рендерится отдельно. Карусель владеет слайдами и навигацией, а не разметкой карточек.",
+        "Ориентир — shadcn/ui; цвета и контролы общие для light/dark, иконки только Lucide.",
+        "Синие outline и focus-ring не добавляются; нейтральный фокус сохраняет клавиатурное управление.",
+        "Прототип не является доступным Blade API; библиотечная реализация и версия поставки ещё не определены."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/media-components.js",
+        "entryPoint": "window.AesteticReference.mediaComponents.carousel",
+        "reference": "docs/component-reuse.md"
+      }
+    },
+    {
+      "id": "image-viewer",
+      "name": "ImageViewer",
+      "layer": "extension",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Модальный просмотр фотографий без обрезки",
+      "dependsOn": [
+        "dialog",
+        "image-slider"
+      ],
+      "designReference": "docs/media.md",
+      "usageRules": [
+        "Показывать полный кадр через contain; Escape закрывает просмотр, фокус возвращается к открывшему элементу.",
+        "Ориентир — shadcn/ui; цвета и контролы общие для light/dark, иконки только Lucide.",
+        "Синие outline и focus-ring не добавляются; нейтральный фокус сохраняет клавиатурное управление.",
+        "Прототип не является доступным Blade API; библиотечная реализация и версия поставки ещё не определены."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/media-components.js",
+        "entryPoint": "window.AesteticReference.mediaComponents.openViewer",
+        "reference": "docs/component-reuse.md"
+      }
+    },
+    {
+      "id": "image-block",
+      "name": "ImageBlock",
+      "layer": "extension",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Адаптивная композиция изображения и текста с действием",
+      "dependsOn": [
+        "image-figure",
+        "panel",
+        "button"
+      ],
+      "designReference": "docs/media.md",
+      "usageRules": [
+        "Изображение и текст относятся к одному материалу; на узком экране складываются вертикально.",
+        "Ориентир — shadcn/ui; цвета и контролы общие для light/dark, иконки только Lucide.",
+        "Синие outline и focus-ring не добавляются; нейтральный фокус сохраняет клавиатурное управление.",
+        "Прототип не является доступным Blade API; библиотечная реализация и версия поставки ещё не определены."
+      ],
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/media-components.js",
+        "entryPoint": "window.AesteticReference.mediaComponents.imageBlock",
+        "reference": "docs/component-reuse.md"
+      }
     },
     {
       "id": "repeater",
@@ -783,6 +2392,243 @@
         "input",
         "link"
       ]
+    },
+    {
+      "id": "accordion",
+      "name": "Accordion",
+      "layer": "composite",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Группа связанных раскрывающихся разделов",
+      "dependsOn": [
+        "icon"
+      ],
+      "designReference": "docs/disclosures.md",
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.accordion",
+        "reference": "docs/disclosures.md"
+      },
+      "usageRules": [
+        "Ориентир — shadcn/ui: нейтральные рамки/разделители, общая типографика, Lucide ChevronDown; без синих outline/focus-ring.",
+        "Сохранять нативное раскрытие details/summary и клавиатуру. Не размещать дополнительные интерактивные элементы внутри summary.",
+        "Передавать содержимое доверенным слотом; состояние данных и маршруты принадлежат приложению. ID экземпляров должны быть уникальными.",
+        "По умолчанию открыт максимум один раздел; multiple разрешает несколько. ArrowUp/ArrowDown/Home/End перемещают фокус между заголовками своей группы."
+      ]
+    },
+    {
+      "id": "collapsible",
+      "name": "Collapsible",
+      "layer": "composite",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Одна скрываемая дополнительная область",
+      "dependsOn": [
+        "icon"
+      ],
+      "designReference": "docs/disclosures.md",
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.collapsible",
+        "reference": "docs/disclosures.md"
+      },
+      "usageRules": [
+        "Ориентир — shadcn/ui: нейтральные рамки/разделители, общая типографика, Lucide ChevronDown; без синих outline/focus-ring.",
+        "Сохранять нативное раскрытие details/summary и клавиатуру. Не размещать дополнительные интерактивные элементы внутри summary.",
+        "Передавать содержимое доверенным слотом; состояние данных и маршруты принадлежат приложению. ID экземпляров должны быть уникальными."
+      ]
+    },
+    {
+      "id": "slider",
+      "name": "Slider",
+      "layer": "primitive",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Выбор одного числового значения ползунком",
+      "dependsOn": [],
+      "designReference": "docs/slider-progress.md",
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.slider",
+        "reference": "docs/slider-progress.md"
+      },
+      "usageRules": [
+        "Ориентир — shadcn/ui: нейтральная дорожка, округлое заполнение и общие light/dark-переменные; без синих outline/focus-ring.",
+        "Значение и состояние операции принадлежат приложению; наличие renderer прототипа не является готовым Blade API.",
+        "Сохранять native input range, min/max/step/disabled и клавиатуру; заполнение и подпись синхронизировать с фактическим value, включая reset формы."
+      ]
+    },
+    {
+      "id": "progress",
+      "name": "Progress",
+      "layer": "primitive",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Определённый либо неопределённый прогресс выполнения",
+      "dependsOn": [],
+      "designReference": "docs/slider-progress.md",
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.progress",
+        "reference": "docs/slider-progress.md"
+      },
+      "usageRules": [
+        "Ориентир — shadcn/ui: нейтральная дорожка, округлое заполнение и общие light/dark-переменные; без синих outline/focus-ring.",
+        "Значение и состояние операции принадлежат приложению; наличие renderer прототипа не является готовым Blade API.",
+        "Процент показывать только при известном значении. Неопределённому прогрессу не задавать aria-valuenow; движение отключать при reduced motion. Индикатор не является интерактивным контролом."
+      ]
+    },
+    {
+      "id": "sheet",
+      "name": "Sheet",
+      "layer": "composite",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Боковое модальное окно для вспомогательной работы",
+      "dependsOn": [
+        "dialog",
+        "button",
+        "icon"
+      ],
+      "designReference": "docs/panels.md",
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.sheetContent",
+        "reference": "docs/panels.md"
+      },
+      "usageRules": [
+        "Ориентир — Sheet/Drawer shadcn/ui: нейтральная поверхность, тонкая рамка, общая тень, затемнение 50%, Lucide X; без синих outline/focus-ring.",
+        "Заголовок и нижние действия остаются на месте; тело прокручивается отдельно. Отступы, кнопки и light/dark-палитра согласованы с общими контролами.",
+        "Использовать нативный dialog и общий panels.show/SheetContent, доступный заголовок, Escape и возврат фокуса. Состояние данных и защита несохранённых изменений принадлежат приложению.",
+        "Наличие прототипа не означает готовность Blade API. Нижний вариант не реализует drag/snap-жесты; reduced motion отключает анимацию появления."
+      ]
+    },
+    {
+      "id": "drawer",
+      "name": "Drawer",
+      "layer": "composite",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Нижняя выдвижная панель с прокручиваемым содержимым",
+      "dependsOn": [
+        "dialog",
+        "button",
+        "icon"
+      ],
+      "designReference": "docs/panels.md",
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.sheetContent",
+        "reference": "docs/panels.md"
+      },
+      "usageRules": [
+        "Ориентир — Sheet/Drawer shadcn/ui: нейтральная поверхность, тонкая рамка, общая тень, затемнение 50%, Lucide X; без синих outline/focus-ring.",
+        "Заголовок и нижние действия остаются на месте; тело прокручивается отдельно. Отступы, кнопки и light/dark-палитра согласованы с общими контролами.",
+        "Использовать нативный dialog и общий panels.show/SheetContent, доступный заголовок, Escape и возврат фокуса. Состояние данных и защита несохранённых изменений принадлежат приложению.",
+        "Наличие прототипа не означает готовность Blade API. Нижний вариант не реализует drag/snap-жесты; reduced motion отключает анимацию появления."
+      ]
+    },
+    {
+      "id": "popover",
+      "name": "Popover",
+      "layer": "composite",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Компактная немодальная поверхность рядом с элементом",
+      "dependsOn": [
+        "button",
+        "icon"
+      ],
+      "designReference": "docs/overlays.md",
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.popover",
+        "reference": "docs/overlays.md"
+      },
+      "usageRules": [
+        "Ориентир — Popover/ContextMenu shadcn/ui: нейтральная поверхность, тонкая рамка, общий радиус и мягкая тень; без синих outline/focus-ring.",
+        "Использовать общие renderers и координатор popup; доступные подписи, Escape и возврат фокуса. Демонстрационные пункты не подтверждают реальное изменение данных.",
+        "Popover содержит доверенный слот обычных контролов; вложенные popup в текущем прототипе не поддержаны. Tooltip не используется для интерактивного содержимого."
+      ]
+    },
+    {
+      "id": "context-menu",
+      "name": "ContextMenu",
+      "layer": "composite",
+      "targetRelease": "next",
+      "status": "planned",
+      "purpose": "Контекстные действия для явно заданной области",
+      "dependsOn": [
+        "button",
+        "icon"
+      ],
+      "designReference": "docs/overlays.md",
+      "prototype": {
+        "status": "source-only",
+        "source": "design/reference/ui-components.js",
+        "entryPoint": "window.AesteticReference.components.contextMenu",
+        "reference": "docs/overlays.md"
+      },
+      "usageRules": [
+        "Ориентир — Popover/ContextMenu shadcn/ui: нейтральная поверхность, тонкая рамка, общий радиус и мягкая тень; без синих outline/focus-ring.",
+        "Использовать общие renderers и координатор popup; доступные подписи, Escape и возврат фокуса. Демонстрационные пункты не подтверждают реальное изменение данных.",
+        "Контекстное меню открывается только в указанной области: правый клик, Shift+F10/ContextMenu или обычная кнопка. Сохранять нативное меню редактируемого текста и ссылок. Пункты делят renderer с ActionMenu."
+      ]
     }
-  ]
+  ],
+  "componentGroups": [
+    {
+      "id": "actions",
+      "label": "Действия",
+      "description": "Кнопки выполняют действие, ссылки переводят в другое место."
+    },
+    {
+      "id": "input",
+      "label": "Ввод данных",
+      "description": "Однострочный и многострочный ввод, выбор файла."
+    },
+    {
+      "id": "selection",
+      "label": "Выбор и настройки",
+      "description": "Один вариант, несколько независимых значений или включение настройки."
+    },
+    {
+      "id": "feedback",
+      "label": "Состояние и обратная связь",
+      "description": "Статус объекта и ожидание выполнения."
+    },
+    {
+      "id": "visual",
+      "label": "Изображения и иконки",
+      "description": "Обозначения, люди и компактные превью."
+    },
+    {
+      "id": "foundations",
+      "label": "Основа интерфейса",
+      "description": "Подключение ассетов, область оформления и структура страницы."
+    }
+  ],
+  "installation": {
+    "package": "aestetic/ui",
+    "localVersion": "0.1.x-dev",
+    "statusNote": "Пакет пока не опубликован. Сейчас используется локальный Composer path; после выпуска через GitHub + Packagist дополнительный источник не потребуется.",
+    "prerequisites": "Исходная среда — PHP 8.3+ и Laravel 12.",
+    "commands": [
+      "composer require \"aestetic/ui:0.1.x-dev\"",
+      "php artisan vendor:publish --tag=aestetic-ui-assets"
+    ],
+    "layoutExample": "{{-- В head основного layout --}}\n<x-ui::assets />\n\n{{-- В body --}}\n<x-ui::scope theme=\"system\" density=\"comfortable\">\n    <x-ui::button>Действие</x-ui::button>\n</x-ui::scope>",
+    "updateCommands": [
+      "composer update aestetic/ui",
+      "php artisan vendor:publish --tag=aestetic-ui-assets --force",
+      "php artisan view:clear"
+    ]
+  }
 }
