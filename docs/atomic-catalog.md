@@ -20,7 +20,7 @@ Workbench рендерит общий layout, карточки обзора и �
 
 ## Написанные атомарные контракты
 
-14 атомов имеют статус `experimental`: Icon, Button, Link, Spinner, Status, Input, Textarea, Select, Checkbox, Radio, Switch, FileInput, Avatar, Thumbnail. Вместе со Scope/Page/Assets это 17 контрактов. Публичного Composer-релиза нет; `libraryVersion=null`, `runtimeVerified=false`.
+14 атомов имеют статус `experimental`: Icon, Button, Link, Spinner, Status, Input, Textarea, Select, Checkbox, Radio, Switch, FileInput, Avatar, Thumbnail. Вместе со Scope/Page/Assets это 17 контрактов. Опубликован Composer-релиз `0.1.0-alpha.1`; `libraryVersion=0.1.0-alpha.1`. Рендеринг проверен, но `runtimeVerified=false` сохраняется до полной проверки браузерных взаимодействий.
 
 Все элементы — отдельные Blade-компоненты. Композиции примеров передают значения, подписи и слоты, а не содержат копии их разметки. Field/Form и серверные привязки остаются отдельной работой; примеры явно связывают нативные label, id, hint/error. Значения, old/errors и ACL передаёт приложение.
 

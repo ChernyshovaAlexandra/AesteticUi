@@ -2,7 +2,7 @@
 
 ## 0.1.0-alpha.1 — 2026-10-23
 
-Первый предварительный выпуск для PHP 8.3+ и Laravel 12. Публичная публикация пока не выполнена.
+Первый предварительный выпуск для PHP 8.3+ и Laravel 12. Опубликован в GitHub и Packagist 23 октября 2026 года.
 
 - Composer-пакет `aestetic/ui`, PSR-4 и автоматическое обнаружение Laravel provider.
 - 14 атомарных Blade-компонентов: Icon, Button, Link, Spinner, Status, Input, Textarea, Select, Checkbox, Radio, Switch, FileInput, Avatar, Thumbnail.
