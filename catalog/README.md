@@ -2,7 +2,7 @@
 
 Поле `prototype` у ряда записей описывает точку входа в дизайн-прототип, источник и документацию переиспользования. `prototype.status=source-only` означает наличие исходника без подтверждения runtime; это не библиотечный статус и не Blade API. Библиотечные `status`, `libraryVersion`, поддерживаемые props/slots оцениваются отдельно. [Границы](../docs/component-reuse.md), [статическая проверка](../docs/reusability-review-2026-10-23.md).
 
-`components.json` — версионированный реестр семейств, контрактов, правил и сценариев. 14 атомов и Scope/Page/Assets имеют статус `experimental`, остальные — `planned`. `libraryVersion=0.1.0-alpha.1` соответствует опубликованному alpha-выпуску; `implementationStatus=atomic-components` — состояние исходников, не результат runtime-проверки.
+`components.json` — версионированный реестр семейств, контрактов, правил и сценариев. 14 атомов и Scope/Page/Assets имеют статус `experimental`, остальные — `planned`. `libraryVersion=0.1.0-alpha.2` соответствует текущему alpha-выпуску; `implementationStatus=atomic-components` — состояние исходников, не результат runtime-проверки.
 
 Схема: ID, имя, слой, целевой выпуск, статус, назначение и проектные зависимости. `targetRelease=0.1` — намерение состава, не обещание реализации. `dependsOn` описывает композиционные связи, не Composer-зависимости.
 

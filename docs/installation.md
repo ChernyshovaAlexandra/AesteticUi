@@ -2,18 +2,18 @@
 
 ## Текущая граница
 
-Composer-пакет `aestetic/ui` содержит 14 атомов и Scope/Page/Assets. Совместимость первого alpha-выпуска: PHP `^8.3` и Laravel 12. Внутренний workbench использует Laravel 12.70.1. Другие версии Laravel пока не заявлены.
+Composer-пакет `aestetic/ui` содержит 14 атомов и Scope/Page/Assets. Совместимость первого alpha-выпуска: PHP `^8.3` и Laravel 12. Внутренний workbench использует Laravel 12.70.1. Начиная с `0.1.0-alpha.2`, ограничения `illuminate/contracts`, `illuminate/support` и `illuminate/view` — `^12.0 || ^13.0`. Поддержка Laravel 12 сохраняется; Laravel 13 добавлен по запросу потребителя `mts33-backend`. Runtime-проверки этого расширения не запускались. [Границы alpha.2](laravel-13.md).
 
-Версия [`0.1.0-alpha.1`](https://packagist.org/packages/aestetic/ui#v0.1.0-alpha.1) опубликована в Packagist 23 октября 2026. [GitHub-релиз](https://github.com/ChernyshovaAlexandra/AesteticUi/releases/tag/v0.1.0-alpha.1), лицензия MIT. Реестр описывает `libraryVersion=0.1.0-alpha.1`; контракты остаются experimental.
+Версия [`0.1.0-alpha.1`](https://packagist.org/packages/aestetic/ui#v0.1.0-alpha.1) опубликована в Packagist 23 октября 2026. [GitHub-релиз](https://github.com/ChernyshovaAlexandra/AesteticUi/releases/tag/v0.1.0-alpha.1), лицензия MIT. В этом первом выпуске реестр описывал `libraryVersion=0.1.0-alpha.1`; текущий реестр — `0.1.0-alpha.2`, контракты остаются experimental.
 
 Проверены локальное подключение, установка ZIP и установка опубликованной версии из Packagist через Composer без symlink: discovery, копирование CSS/JS и 175 успешных запросов рендеринга. Полная визуальная приёмка и проверка браузерных взаимодействий не завершены; существующие внешние Laravel-проекты не изменялись. [Подробности подготовки](first-release.md).
 
-## Установка первого выпуска из Packagist
+## Установка текущего alpha-выпуска из Packagist
 
 Из корня Laravel-приложения:
 
 ```sh
-composer require "aestetic/ui:0.1.0-alpha.1"
+composer require "aestetic/ui:0.1.0-alpha.2"
 php artisan vendor:publish --tag=aestetic-ui-assets
 ```
 
@@ -86,7 +86,7 @@ Aestetic\Ui\AesteticUiServiceProvider::class,
 
 ## Реализованные контракты
 
-Версионированный источник API — [catalog/components.json](../catalog/components.json). 17 контрактов имеют статус experimental; опубликованного выпуска пока нет. Полный каталог, правила UI/UX и параметры находятся в разделе «Компоненты» workbench. Ниже — краткий пример базовой композиции, не полный перечень атомов.
+Версионированный источник API — [catalog/components.json](../catalog/components.json). 17 контрактов имеют статус experimental; версия текущего реестра — `0.1.0-alpha.2`. Полный каталог, правила UI/UX и параметры находятся в разделе «Компоненты» workbench. Ниже — краткий пример базовой композиции, не полный перечень атомов.
 
 | Компонент | API текущего каркаса | Состояния и выбор |
 | --- | --- | --- |

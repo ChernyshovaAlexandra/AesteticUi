@@ -1,7 +1,7 @@
 {
   "schemaVersion": "0.1-draft",
   "catalogVersion": "0.1.0-draft.4",
-  "libraryVersion": "0.1.0-alpha.1",
+  "libraryVersion": "0.1.0-alpha.2",
   "project": "AesteticUi",
   "implementationStatus": "atomic-components",
   "components": [
@@ -2618,10 +2618,10 @@
   "installation": {
     "package": "aestetic/ui",
     "localVersion": "0.1.x-dev",
-    "statusNote": "Пакет пока не опубликован. Сейчас используется локальный Composer path; после выпуска через GitHub + Packagist дополнительный источник не потребуется.",
-    "prerequisites": "Исходная среда — PHP 8.3+ и Laravel 12.",
+    "statusNote": "Публичный канал — GitHub + Packagist; для установки текущего alpha-выпуска дополнительный источник не требуется.",
+    "prerequisites": "PHP ^8.3; Laravel 12 или 13. Совместимость Laravel 13 заявлена в Composer начиная с 0.1.0-alpha.2; runtime-проверки этого расширения не запускались.",
     "commands": [
-      "composer require \"aestetic/ui:0.1.x-dev\"",
+      "composer require \"aestetic/ui:0.1.0-alpha.2\"",
       "php artisan vendor:publish --tag=aestetic-ui-assets"
     ],
     "layoutExample": "{{-- В head основного layout --}}\n<x-ui::assets />\n\n{{-- В body --}}\n<x-ui::scope theme=\"system\" density=\"comfortable\">\n    <x-ui::button>Действие</x-ui::button>\n</x-ui::scope>",
