@@ -1,0 +1,42 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+// Only protocol messages belong on STDOUT. No Laravel bootstrap or app discovery.
+ini_set('display_errors', 'stderr');
+$root = dirname(__DIR__);
+$options = ['--library-root' => $root, '--autoload' => $_composer_autoload_path ?? $root.'/vendor/autoload.php'];
+
+try {
+    for ($index = 1; $index < $argc; $index++) {
+        $argument = $argv[$index];
+        if (in_array($argument, ['--help', '-h'], true)) {
+            fwrite(STDOUT, "Usage: php bin/aestetic-ui-mcp [--autoload /absolute/vendor/autoload.php] [--library-root /absolute/aestetic/ui]\nRead-only STDIO MCP. Select a trusted package snapshot at startup; tool calls never accept file paths.\n");
+            exit(0);
+        }
+        if (! array_key_exists($argument, $options) || ! isset($argv[$index + 1]) || str_starts_with($argv[$index + 1], '--')) {
+            throw new RuntimeException('Unknown or incomplete option. Use --help.');
+        }
+        $options[$argument] = $argv[++$index];
+    }
+    if (! is_file($options['--autoload'])) {
+        throw new RuntimeException('Composer autoload not found. Install dependencies or pass --autoload /absolute/vendor/autoload.php.');
+    }
+    require_once $options['--autoload'];
+    if (! class_exists(\Mcp\Server::class)) {
+        throw new RuntimeException('Optional MCP SDK missing. In the development application run: composer require --dev "mcp/sdk:^0.9.0"');
+    }
+    // The adapter can read an older installed snapshot via --library-root.
+    // Load its own implementation, independently of that snapshot's PSR-4 map.
+    require_once $root.'/src/Mcp/CatalogError.php';
+    require_once $root.'/src/Mcp/CatalogSnapshot.php';
+    require_once $root.'/src/Mcp/McpServer.php';
+
+    $snapshot = new \Aestetic\Ui\Mcp\CatalogSnapshot($options['--library-root']);
+    $server = (new \Aestetic\Ui\Mcp\McpServer($snapshot))->build();
+    exit($server->run(new \Mcp\Server\Transport\StdioTransport()));
+} catch (Throwable $error) {
+    fwrite(STDERR, 'Aestetic UI MCP: '.$error->getMessage().PHP_EOL);
+    exit(1);
+}

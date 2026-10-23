@@ -14,8 +14,8 @@ Props, slots, реальные состояния, ограничения, Blade
 
 ## Живые сценарии
 
-Для experimental-контрактов `previews` задаёт ID, название, описание и высоту iframe в px. ID выбирает фиксированный файл `catalog/examples/<id>.blade.php`. Этот файл исполняется Blade и показывается как исходник; второй HTML-макет не создаётся. Сценарии входят в метаданные и доступны будущему MCP; сам MCP пока не реализован.
+Для experimental-контрактов `previews` задаёт ID, название, описание и высоту iframe в px. ID выбирает фиксированный файл `catalog/examples/<id>.blade.php`. Этот файл исполняется Blade и показывается как исходник; второй HTML-макет не создаётся. Сценарии входят в метаданные и читаются MCP-адаптером вместе с API и guidance; новый адаптер пока не прошёл протокольную приёмку.
 
 Снимок содержит 26 сценариев. Темы/плотность задаются props Scope, состояния — реальными атрибутами компонентов. Служебные wb-классы отвечают только за композицию демонстраций. Инструкция — [workbench/README.md](../workbench/README.md); новые атомы и навигация не прошли HTTP/визуальную приёмку.
 
-Группы навигации задаются componentGroups/catalogGroup, русское имя — displayName. Правила UI/UX хранятся в guidance: summary/when/placement/avoid/accessibility. Общая инструкция подключения хранится в installation. Workbench и будущий MCP читают эти сведения из одного реестра. [Границы реализации](../docs/atomic-catalog.md).
+Группы навигации задаются componentGroups/catalogGroup, русское имя — displayName. Правила UI/UX хранятся в guidance: summary/when/placement/avoid/accessibility. Общая инструкция подключения хранится в installation. Workbench и MCP-адаптер читают эти сведения из одного реестра. [Границы реализации](../docs/atomic-catalog.md).

@@ -2,7 +2,7 @@
 
 ## Статус
 
-Рабочая архитектура первой реализации. Подготовлены Composer-пакет с 14 атомарными элементами, Scope/Page/Assets и Laravel-workbench. Установка и локальный запуск ранее выполнены; новые атомы и навигация пока не прошли HTTP/визуальную приёмку. MCP не реализован. Требования хранятся отдельно от решений в [журнале](decisions.md).
+Рабочая архитектура первой реализации. Подготовлены Composer-пакет с 14 атомарными элементами, Scope/Page/Assets и Laravel-workbench. UI-выпуск 0.1.0-alpha.1 опубликован; установка из Packagist и 175 запросов рендеринга подтверждены. Полная визуальная приёмка не завершена. Исходники read-only MCP-адаптера реализованы, но его запуск и протокольная приёмка не выполнялись. Требования хранятся отдельно от решений в [журнале](decisions.md).
 
 ## Слои
 
@@ -50,11 +50,13 @@ AesteticUi/
   lang/
   dist/                    # будущая поставка готовых ассетов
   workbench/               # живой Laravel-каталог
-  tools/mcp/               # адаптер чтения каталога
+  bin/aestetic-ui-mcp       # STDIO executable
+  src/Mcp/                 # чтение снимка и SDK tools
+  tools/mcp/               # инструкции и пример подключения
   tests/
 ```
 
-Существуют документы, JSON-каталог, служебные файлы и дизайн-прототип в `design/reference/`. Дополнительно созданы `composer.json`, `src/` (provider и чтение manifest), `config/`, `resources/views/components/`, `resources/css/`, `dist/`, `examples/`, `tools/build-assets.php`, `catalog/examples/` и `workbench/`. Остальные области дерева выше — план. Прототип не является renderer библиотеки или живым каталогом.
+Существуют документы, JSON-каталог, служебные файлы и дизайн-прототип в `design/reference/`. Дополнительно созданы `composer.json`, `src/` (provider и чтение manifest), `config/`, `resources/views/components/`, `resources/css/`, `dist/`, `examples/`, `tools/build-assets.php`, `catalog/examples/` и `workbench/`. Также реализованы bin/aestetic-ui-mcp, src/Mcp и tools/mcp; их запуск и подключение к клиенту не подтверждены. Остальные области дерева выше — план. Прототип не является renderer библиотеки или живым каталогом.
 
 Workbench — локальное Laravel 12 приложение и реальный Composer path-потребитель единственного дерева пакета. Его каталог читает реестр подключённого пакета; записи `previews` задают сценарии из `catalog/examples/<id>.blade.php`. Один и тот же фрагмент рендерится Blade и показывается как исходник. Каждый preview — отдельный документ iframe, чтобы темы и Page/main не смешивались с оболочкой. Параметры темы, плотности и ширины хранятся в URL; JS, БД и отдельная frontend-сборка для этого не нужны. Planned-записи показываются как план без API и preview. Служебная оболочка каталога не считается реализацией planned-компонентов навигации/таблиц. Подробнее — [workbench/README.md](../workbench/README.md).
 

@@ -1,0 +1,11 @@
+# Example only: this file is not an active Codex configuration.
+# Use absolute paths appropriate for the computer and selected library snapshot.
+[mcp_servers.aestetic-ui]
+command = "/opt/homebrew/bin/php"
+args = [
+  "/Users/alexandrach/Documents/Projects/AesteticUi/bin/aestetic-ui-mcp",
+  "--autoload",
+  "/Users/alexandrach/Documents/Projects/AesteticUi/workbench/vendor/autoload.php",
+]
+# To pin a Laravel project's installed files, append to args:
+# "--library-root", "/absolute/laravel-project/vendor/aestetic/ui"

@@ -16,6 +16,13 @@
         "illuminate/support": "^12.0",
         "illuminate/view": "^12.0"
     },
+    "require-dev": {
+        "mcp/sdk": "^0.9.0"
+    },
+    "suggest": {
+        "mcp/sdk": "Install ^0.9.0 as a development dependency to run the optional read-only MCP server."
+    },
+    "bin": ["bin/aestetic-ui-mcp"],
     "autoload": {
         "psr-4": {
             "Aestetic\\Ui\\": "src/"
